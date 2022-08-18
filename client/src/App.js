@@ -1,11 +1,14 @@
 import './App.css';
-
-
+import { Route } from 'react-router-dom'
+import Home from './components/Home/Home';
+import NavBar from './components/NavBar/Navbar';
 
 function App() {
+
   return (
     <div className="App">
-      <h1>Henry Food</h1>
+      {/* <Route path='/home' component={Home}></Route> */}
+      <NavBar/>
     </div>
   );
 }

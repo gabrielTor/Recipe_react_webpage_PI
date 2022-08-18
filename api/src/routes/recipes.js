@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
         spoonApi.results.map(r => {
             if(r.title.toLowerCase().includes(name.toLowerCase())) {
                 filteredRecipes.push({
-                    title: r.title,
+                    name: r.title,
                     id: r.id,
                     summary: r.summary,
                     steps: r.analyzedInstructions.length ? r.analyzedInstructions[0].steps : "There are no instructions.",
@@ -29,6 +29,7 @@ router.get('/', async (req, res, next) => {
         })
     // let recipes = [...dbRecipes, ...filteredRecipes]
         if(filteredRecipes.length > 0) return res.send(filteredRecipes)
+        else{res.status(404).send('No recipe found with that name')}
     }
     catch(err){
         next(err)
@@ -38,21 +39,24 @@ router.get('/', async (req, res, next) => {
 router.get('/:recipeId', async (req, res, next) => {
     const { recipeId } = req.params
     try {
-        let recipe = await Recipe.findByPk(recipeId)
-        let diets = await recipe.getDiet_types()
-        diets = diets.map(d => d.dataValues.name)
-        if(recipe){
-            return res.send({...recipe.dataValues, diets})
-        } else{
+        if(String(recipeId).length === 36){
+            let recipe = await Recipe.findByPk(recipeId)
+            let diets = await recipe.getDiet_types()
+            diets = diets.map(d => d.dataValues.name)
+            if(recipe){
+                return res.send({...recipe.dataValues, diets})
+            }
+        }
+        else{
             let apiRecipeFound = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${API_key}`)
             let details = {
-                title: apiRecipeFound.title,
-                id: apiRecipeFound.id,
-                summary: apiRecipeFound.summary,
-                steps: apiRecipeFound.analyzedInstructions.length ? apiRecipeFound.analyzedInstructions[0].steps : "There are no instructions.",
-                healthScore: apiRecipeFound.healthScore,
-                image: apiRecipeFound.image,
-                diets: apiRecipeFound.diets
+                name: apiRecipeFound.data.title,
+                id: apiRecipeFound.data.id,
+                summary: apiRecipeFound.data.summary,
+                steps: apiRecipeFound.data.analyzedInstructions.length ? apiRecipeFound.data.analyzedInstructions[0].steps : "There are no instructions.",
+                healthScore: apiRecipeFound.data.healthScore,
+                image: apiRecipeFound.data.image,
+                diets: apiRecipeFound.data.diets
             }
             return res.json(details)
         }
@@ -61,14 +65,14 @@ router.get('/:recipeId', async (req, res, next) => {
     }
 })
 
-router.post('/', (req, res, next) => {
-    const { title, summary, steps, healthScore, image, diets } = req.body
+router.post('/', async (req, res, next) => {
+    const { name, summary, steps, health_score, image, diets } = req.body
     try {
         const newRecipe = await Recipe.create({
-            title,
+            name,
             summary,
             steps,
-            healthScore,
+            health_score,
             image,
             diets
         })

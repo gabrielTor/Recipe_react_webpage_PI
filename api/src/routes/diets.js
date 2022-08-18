@@ -3,17 +3,17 @@ const router = Router();
 const {Diet_types} = require('../db')
 
 let dietsArr = [
-    { diets: "gluten free" },
-    { diets: "ketogenic" },
-    { diets: "vegetarian" },
-    { diets: "lacto vegetarian" },
-    { diets: "ovo vegetarian" },
-    { diets: "vegan" },
-    { diets: "pescatarian" },
-    { diets: "paleo" },
-    { diets: "primal" },
-    { diets: "whole 30" },
-    { diets: "Low FODMAP" }
+    "gluten free",
+    "ketogenic",
+    "vegetarian",
+    "lacto vegetarian",
+    "ovo vegetarian",
+    "vegan",
+    "pescatarian",
+    "paleo",
+    "primal",
+    "whole 30",
+    "Low FODMAP" 
   ];
 
 router.get('/', async (req, res, next) => {
@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
         dietsArr.map((d) => {
             Diet_types.findOrCreate({ 
                 where: { 
-                    diet: d.diets 
+                    name: d 
                 } 
             });
         })

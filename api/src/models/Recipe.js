@@ -23,6 +23,9 @@ module.exports = (sequelize) => {
     },
     steps: {
       type: DataTypes.TEXT
+    },
+    image: {
+      type: DataTypes.TEXT
     }
   }, {
     timestamps: false
