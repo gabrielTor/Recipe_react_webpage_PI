@@ -4,12 +4,14 @@ import {
     CREATE_RECIPE, 
     FILTER_BY_DIET, 
     ORDER_ALPHABETICALLY,
-    ORDER_HEALTH_SCORE 
+    ORDER_HEALTH_SCORE,
+    GET_DIET_TYPES 
 } from "./actions";
 
 let initialState = {
     recipes: [],
-    recipeDetail: {}
+    recipeDetail: {},
+    diets: []
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -31,12 +33,23 @@ export const rootReducer = (state = initialState, action) => {
             }
         case FILTER_BY_DIET:
             return {
-
+                ...state,
+                diets: action.payload
             }
         case ORDER_ALPHABETICALLY:
             return {
                 ...state,
                 recipes: state.recipes.sort()
+            }
+        case ORDER_HEALTH_SCORE:
+            return {
+                ...state,
+                recipes: state.recipes.sort((a,b)=> a.healthScore - b.healthScore)
+            }
+        case GET_DIET_TYPES:
+            return {
+                ...state,
+                diets: action.payload
             }
         default: return state
     }

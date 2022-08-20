@@ -12,10 +12,3 @@ router.use('/diets', diets_Router)
 
 
 module.exports = router;
-
-
-//https://api.spoonacular.com/recipes/716429/information?apiKey=5ac2284383764e7fb51efd184167d806
-
-// https://api.spoonacular.com/recipes/complexSearch/?apiKey=5ac2284383764e7fb51efd184167d806
-
-// https://api.spoonacular.com/recipes/complexSearch?apiKey=5ac2284383764e7fb51efd184167d806&addRecipeInformation=true&number=9

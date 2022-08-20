@@ -23,9 +23,9 @@ function Search() {
         type="text"
         placeholder="Look for Recipe"
         value={recName}
-        onChange={e => onSearch(e)}
+        onChange={(e) => onSearch(e)}
       />
-      <input type="submit" value="Search" onSubmit={e => click(e)} />
+      <input type="submit" value="Search" onSubmit={(e) => click(e)} />
     </form>
   );
 }

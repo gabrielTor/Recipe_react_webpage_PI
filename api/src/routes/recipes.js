@@ -9,10 +9,29 @@ const recipeUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${AP
 router.get('/', async (req, res, next) => {
     const { name } = req.query
     try{
-        let spoonApi= await axios.get(recipeUrl)
+
+        let spoonApi = await axios.get(recipeUrl)
         .then(resp => resp.data)
 
-        let filteredRecipes = [];
+        var hundredRecipes = []
+        spoonApi.results.map(r => {
+            hundredRecipes.push({
+                name: r.title,
+                id: r.id,
+                summary: r.summary,
+                steps: r.analyzedInstructions.length ? r.analyzedInstructions[0].steps : "There are no instructions.",
+                healthScore: r.healthScore,
+                image: r.image,
+                diets: r.diets
+            })
+        })
+
+        if(name){
+
+        let spoonApi = await axios.get(recipeUrl)
+        .then(resp => resp.data)
+
+        let filteredRecipes = []
 
         spoonApi.results.map(r => {
             if(r.title.toLowerCase().includes(name.toLowerCase())) {
@@ -27,14 +46,43 @@ router.get('/', async (req, res, next) => {
                 })
             } 
         })
-    // let recipes = [...dbRecipes, ...filteredRecipes]
-        if(filteredRecipes.length > 0) return res.send(filteredRecipes)
-        else{res.status(404).send('No recipe found with that name')}
+
+        const recipeDB =  await Recipe.findAll({ 
+            include:{
+                model: Diet_types,
+                attributes: ['name'],
+                through:{
+                    attributes: []
+                }
+            }
+        })
+        let dbRecipes = await recipeDB?.map(r => {
+            return {
+                id: r.id,
+                name: r.name,
+                summary: r.summary,
+                score: r.score,
+                healthScore: r.healthScore,
+                image: r.image,
+                steps: r.steps,
+                diets: r.diets?.map(diet => diet.name),
+            }
+        })
+
+        let allRecipes = [...dbRecipes, ...filteredRecipes]
+        // if(filteredRecipes.length > 0) return res.send(filteredRecipes)
+        if(allRecipes.length > 0) return res.send(allRecipes)
+        else{res.status(404).json({msg:'No recipe found with that name'})}
+        } else{
+            res.send(hundredRecipes)
+        }
     }
     catch(err){
         next(err)
     }
 })
+
+
 
 router.get('/:recipeId', async (req, res, next) => {
     const { recipeId } = req.params
@@ -65,14 +113,16 @@ router.get('/:recipeId', async (req, res, next) => {
     }
 })
 
+
+
 router.post('/', async (req, res, next) => {
-    const { name, summary, steps, health_score, image, diets } = req.body
+    const { name, summary, steps, healthScore, image, diets } = req.body
     try {
         const newRecipe = await Recipe.create({
             name,
             summary,
             steps,
-            health_score,
+            healthScore,
             image,
             diets
         })
