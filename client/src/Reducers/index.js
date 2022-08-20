@@ -1,4 +1,5 @@
-import { 
+import {
+    GET_RECIPES_BY_NAME, 
     GET_ALL_RECIPES, 
     GET_RECIPE_DETAIL, 
     CREATE_RECIPE, 
@@ -10,13 +11,18 @@ import {
 
 let initialState = {
     recipes: [],
-    recipeDetail: {},
+    recipeDetail: [],
     diets: []
 }
 
 export const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_ALL_RECIPES:
+            return {
+                ...state,
+                recipes: action.payload
+            }
+        case GET_RECIPES_BY_NAME:
             return {
                 ...state,
                 recipes: action.payload

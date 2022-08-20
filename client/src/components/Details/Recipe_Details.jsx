@@ -5,16 +5,16 @@ import { useEffect } from 'react'
 import { getRecipeDetail } from '../../Reducers/actions'
 
 function Recipe_Details(props) {
-  // const dispatch = useDispatch()
-  // const recipeDetail = useSelector(state => state.recipeDetail)
+  const dispatch = useDispatch()
+  const recipeDetail = useSelector(state => state.recipeDetail)
 
-  // useEffect(()=>{
-  //   dispatch(getRecipeDetail(props.match.params.id))
-  // }, [dispatch])
+  useEffect(()=>{
+    dispatch(getRecipeDetail(props.match.params.id))
+  }, [dispatch])
 
     return (
       <div>
-        henry food
+        
       </div>
     );
   }

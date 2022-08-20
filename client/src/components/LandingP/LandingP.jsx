@@ -1,4 +1,5 @@
 import React from "react";
+import './landingP.css'
 import { Link } from 'react-router-dom'
 
 function LandingP(){
