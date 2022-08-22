@@ -3,18 +3,17 @@ const router = Router();
 const {Diet_types} = require('../db')
 
 let dietsArr = [
-    "gluten free",
-    "ketogenic",
-    "vegetarian",
-    "lacto vegetarian",
-    "ovo vegetarian",
-    "vegan",
-    "pescatarian",
-    "paleo",
-    "primal",
-    "whole 30",
-    "Low FODMAP" 
-  ];
+  "gluten free",
+  "dairy free",          
+  "ketogenic",           
+  "lacto ovo vegetarian",
+  "vegan",               
+  "pescatarian",         
+  "paleolithic",         
+  "primal",              
+  "fodmap friendly",     
+  "whole 30"
+]
 
 router.get('/', async (req, res, next) => {
       try {

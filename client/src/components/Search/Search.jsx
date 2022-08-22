@@ -9,10 +9,10 @@ function Search() {
   const [recName, setRecName] = useState('')
   const dispatch = useDispatch()
 
-  const onSearch = (event) => {
+  const handleOnSearch = (event) => {
     setRecName(event.target.value)
   }
-  const click = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
     dispatch(getRecipesByName(recName))
   }
@@ -22,10 +22,9 @@ function Search() {
       <input
         type="text"
         placeholder="Look for Recipe"
-        value={recName}
-        onChange={(e) => onSearch(e)}
+        onChange={(e) => handleOnSearch(e)}
       />
-      <input type="submit" value="Search" onSubmit={(e) => click(e)} />
+      <button type="submit" onClick={(e) => handleSubmit(e)}>Search</button>
     </form>
   );
 }
