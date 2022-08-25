@@ -2,3 +2,12 @@
     max-width: 65%;
     max-height: 50%px;
 }
+.details{
+    margin-top: 5rem;
+}
+.details ol{
+    list-style-type: none;
+}
+li{
+    list-style-type: none;
+}

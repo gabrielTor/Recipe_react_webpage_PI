@@ -3,7 +3,8 @@ import './pagination.css'
 
 function Pagination({ recipesPerPage, totalRecipes, page, nextP, prevP }){
     const pageN = []
-    for (let i = 1; i <= Math.ceil(totalRecipes / recipesPerPage); i++) {
+    let numLength = Math.ceil(totalRecipes / recipesPerPage)
+    for (let i = 1; i <= numLength; i++) {
         pageN.push(i)
     }
 

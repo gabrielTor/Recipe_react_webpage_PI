@@ -15,7 +15,7 @@ function Recipe_Details(props) {
   }, [])
 
     return (
-      <div>
+      <div className="details">
         <Navbar/>
         <h1>{details.name}</h1>
         <h4>Summary: {details.summary}</h4>
@@ -32,10 +32,10 @@ function Recipe_Details(props) {
         <h3>Health Score: {details.healthScore}</h3>
         {
           Array.isArray(details.dishTypes) ?
-          <h3>Dish types: {details.dishTypes?.map(d => (<ul><li>{d}</li></ul>))}</h3> :
+          <h3>Dish types: {details.dishTypes?.map(d => (<ul><li>- {d}</li></ul>))}</h3> :
           <h3>Dish types: {details.dishTypes}</h3>
         }
-        <h3>Diet Type: {details.diets?.map(d => (<ul><li>{d}</li></ul>))}</h3>
+        <h3>Diet Type: {details.diets?.map(d => (<ul><li>- {d}</li></ul>))}</h3>
       </div>
     );
   }

@@ -16,13 +16,20 @@ function Home() {
   const dispatch = useDispatch()
   const allRecipes = useSelector(state => state.recipes)
   const recipeFound = useSelector(state => state.recipesByName)
-
+ 
   const indexLast = page * recipesPerPage
   const indexFirst = indexLast - recipesPerPage
   const currentRecipes = recipeFound.length ? recipeFound.slice(indexFirst, indexLast) : allRecipes.slice(indexFirst, indexLast)
   const handlePage = (num) => setPage(num)
-  const handleNext = () => setPage(page + 1)
-  const handlePrev = () => setPage(page - 1)
+  
+  let totalRecipes = recipeFound.length ? recipeFound.length : allRecipes.length
+  let numLength = Math.ceil(totalRecipes / recipesPerPage)
+  const handleNext = () => {
+    if(numLength !== page) setPage(page + 1)
+  }
+  const handlePrev = () => {
+    if(page !== 1) setPage(page - 1)
+  }
 
   useEffect(() => {
     dispatch(getRecipes())
@@ -50,7 +57,7 @@ function Home() {
       }
       <Pagination 
         recipesPerPage={recipesPerPage} 
-        totalRecipes={allRecipes.length} 
+        totalRecipes={totalRecipes} 
         page={handlePage}
         nextP={handleNext}
         prevP={handlePrev}/>

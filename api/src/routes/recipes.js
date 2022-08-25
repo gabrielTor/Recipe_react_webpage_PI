@@ -43,9 +43,10 @@ router.get('/', async (req, res, next) => {
                 image: r.image,
                 steps: r.steps,
                 dishTypes: r.dishTypes,
-                diets: r.diets?.map(diet => diet.name)
+                diets: r.diets
             }
         })
+
         let allRecipes = [...dbRecipes, ...hundredRecipes]
 
         if(name){
