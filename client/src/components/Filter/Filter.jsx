@@ -1,17 +1,38 @@
 import React from "react";
 import './filter.css'
+import { useDispatch } from "react-redux";
+import { orderAlphabetically, filterByDiet, orderHealthScore } from '../../Reducers/actions'
 
 function Filter(){
+
+    const dispatch = useDispatch()
+
+    const handleOrder = (event) => {
+        dispatch(orderAlphabetically(event.target.value))
+    }
+    const handleDiet = (event) => {
+        dispatch(filterByDiet(event.target.value))
+    }
+    const handleHealthOrder = (event) => {
+        dispatch(orderHealthScore(event.target.value))
+    }
+
     return(
-        <div>
-            <select>
+        <div className="filter">
+            <select onChange={(e)=>handleOrder(e)}>
                 <option>Order by:</option>
                 <option value='A-Z'>A-Z</option>
                 <option value='Z-A'>Z-A</option>
-                <option value='healthScore'>by health score</option>
             </select>
-            <select>
-                <option>Filter by diet:</option>
+
+            <select onChange={(e)=>handleHealthOrder(e)}>
+                <option>Health Score Order</option>
+                <option value='highest'>highest health score</option>
+                <option value='lowest'>lowest health score</option>
+            </select>
+
+            <select onChange={(e)=>handleDiet(e)}>
+                <option value='none'>Filter by diet:</option>
                 <option value='gluten free'>gluten free</option>
                 <option value='dairy free'>dairy free</option>
                 <option value='ketogenic'>ketogenic</option>
@@ -22,7 +43,7 @@ function Filter(){
                 <option value='primal'>primal</option>
                 <option value='fodmap friendly'>fodmap friendly</option>
                 <option value='whole 30'>whole 30</option>
-                </select>
+            </select>
         </div>
     )
 }

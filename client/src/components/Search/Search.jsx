@@ -18,7 +18,7 @@ function Search() {
   }
 
   return (
-    <form>
+    <form className="search">
       <input
         type="text"
         placeholder="Look for Recipe"

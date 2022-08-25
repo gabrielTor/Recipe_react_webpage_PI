@@ -4,7 +4,7 @@ import {
     GET_RECIPE_DETAIL, 
     CREATE_RECIPE, 
     FILTER_BY_DIET, 
-    ORDER_ALPHABETICALLY,
+    ALPHABETICALLY,
     ORDER_HEALTH_SCORE,
     GET_DIET_TYPES 
 } from "./actions";
@@ -12,7 +12,7 @@ import {
 let initialState = {
     recipesByName: [],
     recipes: [],
-    recipeDetail: [],
+    recipeDetail: {},
     diets: []
 }
 
@@ -39,24 +39,44 @@ export const rootReducer = (state = initialState, action) => {
                 recipes: state.recipes.concat(action.peyload)
             }
         case FILTER_BY_DIET:
+            const recipes = state.recipes
+            const dietsfilter = action.payload === 'none' ? recipes : recipes.filter(r => r.diets.includes(action.payload))
             return {
                 ...state,
-                diets: action.payload
+                recipes: dietsfilter
             }
-        case ORDER_ALPHABETICALLY:
+        case ALPHABETICALLY:
+            const order = action.payload === 'A-Z' 
+                ? state.recipes.sort((a, b) => {
+                    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
+                    else return -1
+                    })
+                : state.recipes.sort((a, b) => {
+                    if (a.name.toLowerCase() < b.name.toLowerCase()) return 1
+                    else return -1
+                    })
             return {
                 ...state,
-                recipes: state.recipes.sort()
-            }
-        case ORDER_HEALTH_SCORE:
-            return {
-                ...state,
-                recipes: state.recipes.sort((a,b)=> a.healthScore - b.healthScore)
+                recipes: order
             }
         case GET_DIET_TYPES:
             return {
                 ...state,
                 diets: action.payload
+            }
+        case ORDER_HEALTH_SCORE:
+            const orderScore = action.payload === 'highest' 
+                ? state.recipes.sort((a, b) => {
+                    if ((a.healthScore - b.healthScore) < 0) return 1
+                    else return -1                           
+                    }) 
+                : state.recipes.sort((a, b) => {                        
+                    if ((b.healthScore - a.healthScore) < 0) return 1
+                    else return -1
+                    })
+            return {
+                ...state,
+                recipes: orderScore
             }
         default: return state
     }

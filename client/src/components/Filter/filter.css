@@ -1,0 +1,7 @@
+.filter select{
+    background-color: aquamarine;
+    border-radius: 0.15rem;
+    height: 2rem;
+    width: 10rem;
+    margin: 0.2rem;
+}

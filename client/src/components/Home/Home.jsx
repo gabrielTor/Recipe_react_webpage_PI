@@ -3,7 +3,7 @@ import './home.css'
 import Navbar from "../NavBar/Navbar";
 import { useDispatch, useSelector } from 'react-redux'
 import Recipe from '../Recipe/Recpie'
-import { getRecipes } from '../../Reducers/actions'
+import { getRecipes, getDietTypes } from '../../Reducers/actions'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Pagination from "../Pagination/Pagination";
@@ -17,23 +17,26 @@ function Home() {
   const allRecipes = useSelector(state => state.recipes)
   const recipeFound = useSelector(state => state.recipesByName)
 
-  useEffect(() => {
-    dispatch(getRecipes())
-  }, [dispatch])
-
   const indexLast = page * recipesPerPage
   const indexFirst = indexLast - recipesPerPage
   const currentRecipes = recipeFound.length ? recipeFound.slice(indexFirst, indexLast) : allRecipes.slice(indexFirst, indexLast)
-  const handlePage = (n) => setPage(n)
+  const handlePage = (num) => setPage(num)
+  const handleNext = () => setPage(page + 1)
+  const handlePrev = () => setPage(page - 1)
+
+  useEffect(() => {
+    dispatch(getRecipes())
+    dispatch(getDietTypes())
+  }, [dispatch])
 
   return (
-    <div>
+    <div id="home">
       <Navbar/>
       <Filter/>
       {
         currentRecipes?.map(r => {
           return(
-            <div key={r.id}>
+            <div key={r.id} className='rCards'>
               <Link to={`/home/${r.id}`}>
                 <Recipe 
                   name={r.name} 
@@ -45,7 +48,12 @@ function Home() {
           )
         })
       }
-      <Pagination recipesPerPage={recipesPerPage} totalRecipes={allRecipes.length} page={handlePage}/>
+      <Pagination 
+        recipesPerPage={recipesPerPage} 
+        totalRecipes={allRecipes.length} 
+        page={handlePage}
+        nextP={handleNext}
+        prevP={handlePrev}/>
     </div>
   )
 }

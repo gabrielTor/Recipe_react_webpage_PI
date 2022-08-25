@@ -1,0 +1,39 @@
+#form{
+    position: static;
+    margin-top: 6rem;
+}
+#form button{
+    background-color: aqua;
+    border-radius: 0.3rem;
+    border: none;
+    width: 5rem;
+    height: 2rem;
+    cursor: pointer;
+    margin-top: 2rem;
+    font-size: large;
+}
+.diets{
+    display: block;
+}
+.danger{
+    color: red;
+}
+.form{
+    display: block;
+    font-weight: bold;
+    margin: 1rem;
+}
+textarea{
+    width: 30%;
+    height: 15%;
+}
+#dtypes{
+    border-style: inset;
+    border-color: rgb(139, 129, 213);
+    max-width: fit-content;
+    margin: auto;
+    font-weight: bold;
+}
+label{
+    margin-right: 2rem;
+}

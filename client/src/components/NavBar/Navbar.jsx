@@ -6,14 +6,14 @@ import Search from '../Search/Search'
 function Navbar() {
     return (
       <nav>
-        <ul>
-          <li>
-            <Link to='/home'>Home</Link>
+        <ul className="nav">
+          <li className="navList">
+            <Link to='/home'><a>HOME</a></Link>
           </li>
-          <li>
-            <Link to='/createRecipe'>Create Recipe</Link>
+          <li className="navList">
+            <Link to='/createRecipe'><a>Create Recipe</a></Link>
           </li>
-          <li>
+          <li className="navSearch">
             <Search/>
           </li>
         </ul>

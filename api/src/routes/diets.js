@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const {Diet_types} = require('../db')
+const {DietTypes} = require('../db')
 
 let dietsArr = [
   "gluten free",
@@ -16,19 +16,18 @@ let dietsArr = [
 ]
 
 router.get('/', async (req, res, next) => {
-      try {
-        dietsArr.map((d) => {
-            Diet_types.findOrCreate({ 
-                where: { 
-                    name: d 
-                } 
-            });
-        })
-        let diet_types = await Diet_types.findAll()
-        res.send(diet_types)
-      } catch (err) {
-            next(err)
-      }
+  try {
+    dietsArr.map((d) => {
+      DietTypes.findOrCreate({ 
+          where: { name: d } 
+      });
+    })
+    let diet_types = await DietTypes.findAll()
+    res.send(diet_types)
+    } 
+    catch (err) {
+      next(err)
+    }
 })
 
 

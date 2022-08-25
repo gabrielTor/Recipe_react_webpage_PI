@@ -1,4 +1,27 @@
-body{
+#landing{
     background-image: url(./background.png);
     background-size: cover;
+    height: 36rem;
+    width: 100%;
+    margin-top: 0;
+
+}
+.main{
+    margin-top: 0;
+}
+.mainbtn{
+    background-color: rgba(249, 204, 4, 0.557);
+    border: none;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 3rem;
+    font-weight: bold;
+    font-size: x-large;
+}
+.mainbtn:hover{
+    background-color: orange;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 4rem;
+    color: blue;
 }

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 
 function LandingP(){
     return(
-        <div>
-            <h1>WELCOME TO MY FOOD WEB APP</h1>
+        <div id="landing">
+            <h1 className="main">WELCOME TO MY FOOD WEB APP</h1>
             <Link to='/home'>
-                <button>HOME</button>
+                <button className="mainbtn">HOME</button>
             </Link>
         </div>
     )

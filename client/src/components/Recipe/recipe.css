@@ -1,0 +1,10 @@
+#recipeImg{
+    max-width: 312px;
+    max-height: 231px;
+}
+.card{
+    max-width: 400px;
+    max-height: 450px;
+    display: inline-block;
+    margin: 10px;
+}

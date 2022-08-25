@@ -5,9 +5,9 @@ export const GET_RECIPE_DETAIL = "GET_RECIPE_DETAIL"
 export const GET_ALL_RECIPES = "GET_ALL_RECIPES"
 export const CREATE_RECIPE = "CREATE_RECIPE"
 export const FILTER_BY_DIET = "FILTER_BY_DIET"
-export const ORDER_ALPHABETICALLY = "ORDER_ALPHABETICALLY"
-export const ORDER_HEALTH_SCORE = "ORDER_HEALTH_SCORE"
+export const ALPHABETICALLY = "ALPHABETICALLY"
 export const GET_DIET_TYPES = "GET_DIET_TYPES"
+export const ORDER_HEALTH_SCORE = "ORDER_HEALTH_SCORE"
 
 export const getRecipes = () => {
     return async (dispatch) => {
@@ -63,12 +63,12 @@ export const filterByDiet = (value) => {
 
 export const orderAlphabetically = (value) => {
     return {
-        type: ORDER_ALPHABETICALLY,
+        type: ALPHABETICALLY,
         payload: value
     }
 }
 
-export const orderByScore = (value) => {
+export const orderHealthScore = (value) => {
     return {
         type: ORDER_HEALTH_SCORE,
         payload: value

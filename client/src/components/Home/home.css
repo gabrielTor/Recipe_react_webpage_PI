@@ -1,0 +1,11 @@
+.rCards{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#home{
+    margin-top: 6rem;
+}
+#home div{
+    margin-bottom: 1rem;
+}

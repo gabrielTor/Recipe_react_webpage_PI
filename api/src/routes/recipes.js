@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const axios = require('axios')
-const {Recipe, Diet_types} = require('../db')
+const {Recipe, DietTypes} = require('../db')
 require('dotenv').config();
 const { API_key } = process.env;
 const recipeUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_key}&addRecipeInformation=true&number=100`;
@@ -9,47 +9,24 @@ const recipeUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${AP
 router.get('/', async (req, res, next) => {
     const { name } = req.query
     try{
-
         let spoonApi = await axios.get(recipeUrl)
         .then(resp => resp.data)
 
-        var hundredRecipes = []
-        spoonApi.results.map(r => {
-            hundredRecipes.push({
+        let hundredRecipes = spoonApi.results.map(r => {
+            return {
                 name: r.title,
                 id: r.id,
                 summary: r.summary,
                 steps: r.analyzedInstructions.length ? r.analyzedInstructions[0].steps : "There are no instructions.",
                 healthScore: r.healthScore,
                 image: r.image,
+                dishTypes: r.dishTypes,
                 diets: r.diets
-            })
+            }
         })
-
-        if(name){
-
-        let spoonApi = await axios.get(recipeUrl)
-        .then(resp => resp.data)
-
-        let filteredRecipes = []
-
-        spoonApi.results.map(r => {
-            if(r.title.toLowerCase().includes(name.toLowerCase())) {
-                filteredRecipes.push({
-                    name: r.title,
-                    id: r.id,
-                    summary: r.summary,
-                    steps: r.analyzedInstructions.length ? r.analyzedInstructions[0].steps : "There are no instructions.",
-                    healthScore: r.healthScore,
-                    image: r.image,
-                    diets: r.diets
-                })
-            } 
-        })
-
-        const recipeDB =  await Recipe.findAll({ 
+        const recipeDB = await Recipe.findAll({ 
             include:{
-                model: Diet_types,
+                model: DietTypes,
                 attributes: ['name'],
                 through:{
                     attributes: []
@@ -65,17 +42,18 @@ router.get('/', async (req, res, next) => {
                 healthScore: r.healthScore,
                 image: r.image,
                 steps: r.steps,
-                diets: r.diets?.map(diet => diet.name),
+                dishTypes: r.dishTypes,
+                diets: r.diets?.map(diet => diet.name)
             }
         })
+        let allRecipes = [...dbRecipes, ...hundredRecipes]
 
-        let allRecipes = [...dbRecipes, ...filteredRecipes]
-        // if(filteredRecipes.length > 0) return res.send(filteredRecipes)
-        if(allRecipes.length > 0) return res.send(allRecipes)
-        else{res.status(404).json({msg:'No recipe found with that name'})}
-        } else{
-            res.send(hundredRecipes)
-        }
+        if(name){
+        const recipeName = allRecipes.filter(r => r.name.toLowerCase().includes(name.toLowerCase()) )
+        if(recipeName.length > 0) return res.send(recipeName)
+        else res.status(404).send('No recipe found with that name')
+        } 
+        else res.send(allRecipes)
     }
     catch(err){
         next(err)
@@ -89,7 +67,7 @@ router.get('/:recipeId', async (req, res, next) => {
     try {
         if(String(recipeId).length === 36){
             let recipe = await Recipe.findByPk(recipeId)
-            let diets = await recipe.getDiet_types()
+            let diets = await recipe.getDietTypes()
             diets = diets.map(d => d.dataValues.name)
             if(recipe){
                 return res.send({...recipe.dataValues, diets})
@@ -104,9 +82,10 @@ router.get('/:recipeId', async (req, res, next) => {
                 steps: apiRecipeFound.data.analyzedInstructions.length ? apiRecipeFound.data.analyzedInstructions[0].steps : "There are no instructions.",
                 healthScore: apiRecipeFound.data.healthScore,
                 image: apiRecipeFound.data.image,
+                dishTypes: apiRecipeFound.data.dishTypes,
                 diets: apiRecipeFound.data.diets
             }
-            return res.json(details)
+            return res.send(details)
         }
     } catch (err) {
         next(err)
@@ -116,18 +95,25 @@ router.get('/:recipeId', async (req, res, next) => {
 
 
 router.post('/', async (req, res, next) => {
-    const { name, summary, steps, healthScore, image, diets } = req.body
+    const { name, summary, steps, healthScore, image, diets, dishTypes } = req.body
     try {
-        const newRecipe = await Recipe.create({
+        if(!name, !summary) return res.status(404).send('name and summary are requied')
+        if(healthScore < 0 || healthScore > 100) return res.status(404).send('health score must be between 0 and 100')
+        else if(/[^a-zA-Z]/g.test(name)) return res.status(404).send('Name could be letters, no symbols!')
+        let newRecipe = await Recipe.create({
             name,
             summary,
             steps,
             healthScore,
             image,
-            diets
+            dishTypes
         })
 
-        res.json(newRecipe)
+        let dietDb = await DietTypes.findAll({
+            where:{ name: diets }
+        })
+        newRecipe.addDietTypes(dietDb)
+        res.send(ok)
 
     } catch (err) {
         next(err)

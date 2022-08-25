@@ -5,15 +5,14 @@ import Create_Recipe from './components/CreateRecipe/Create_Recipe'
 import Recipe_Details from './components/Details/Recipe_Details'
 import LandingP from './components/LandingP/LandingP'
 
-
 function App() {
 
   return (
     <div className="App">
       <Route exact path='/' component={LandingP}/>
-      <Route path='/home' component={Home}/>
+      <Route exact path='/home' component={Home}/>
       <Route path='/createRecipe' component={Create_Recipe}/>
-      <Route path='/home:id' component={Recipe_Details}/>
+      <Route path='/home/:id' component={Recipe_Details}/>
     </div>
   );
 }
