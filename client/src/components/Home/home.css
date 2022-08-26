@@ -9,3 +9,9 @@
 #home div{
     margin-bottom: 1rem;
 }
+.rCards a:visited{
+    color: black;
+}
+.rCards a{
+    color: black;
+}

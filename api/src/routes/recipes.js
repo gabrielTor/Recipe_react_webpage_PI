@@ -24,15 +24,7 @@ router.get('/', async (req, res, next) => {
                 diets: r.diets
             }
         })
-        const recipeDB = await Recipe.findAll({ 
-            include:{
-                model: DietTypes,
-                attributes: ['name'],
-                through:{
-                    attributes: []
-                }
-            }
-        })
+        const recipeDB = await Recipe.findAll({ include: DietTypes })
         let dbRecipes = await recipeDB?.map(r => {
             return {
                 id: r.id,
@@ -43,10 +35,10 @@ router.get('/', async (req, res, next) => {
                 image: r.image,
                 steps: r.steps,
                 dishTypes: r.dishTypes,
-                diets: r.diets
+                diets: r.dietTypes.map(d => d.name)
             }
         })
-
+        dbRecipes.reverse()
         let allRecipes = [...dbRecipes, ...hundredRecipes]
 
         if(name){
@@ -100,7 +92,7 @@ router.post('/', async (req, res, next) => {
     try {
         if(!name, !summary) return res.status(404).send('name and summary are requied')
         if(healthScore < 0 || healthScore > 100) return res.status(404).send('health score must be between 0 and 100')
-        else if(/[^a-zA-Z]/g.test(name)) return res.status(404).send('Name could be letters, no symbols!')
+        else if(/[^a-zA-Z ]/g.test(name)) return res.status(404).send('Name could be letters, no symbols!')
         let newRecipe = await Recipe.create({
             name,
             summary,
@@ -114,7 +106,7 @@ router.post('/', async (req, res, next) => {
             where:{ name: diets }
         })
         newRecipe.addDietTypes(dietDb)
-        res.send(ok)
+        res.send('ok')
 
     } catch (err) {
         next(err)

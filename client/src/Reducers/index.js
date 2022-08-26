@@ -13,7 +13,8 @@ let initialState = {
     recipesByName: [],
     recipes: [],
     recipeDetail: {},
-    diets: []
+    diets: [],
+    recipesAll: []
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -21,7 +22,8 @@ export const rootReducer = (state = initialState, action) => {
         case GET_ALL_RECIPES:
             return {
                 ...state,
-                recipes: action.payload
+                recipes: action.payload,
+                recipesAll: action.payload
             }
         case GET_RECIPES_BY_NAME:
             return {
@@ -39,22 +41,21 @@ export const rootReducer = (state = initialState, action) => {
                 recipes: state.recipes.concat(action.peyload)
             }
         case FILTER_BY_DIET:
-            const recipes = state.recipes
-            let dietsfilter = action.payload === 'none' ? recipes : recipes.filter(r => r.diets.includes(action.payload))
+            let dietsfilter = action.payload === 'none' ? state.recipesAll : state.recipesAll.filter(r => r.diets.includes(action.payload))
             return {
                 ...state,
                 recipes: dietsfilter
             }
         case ALPHABETICALLY:
-            const order = action.payload === 'A-Z' 
-                ? state.recipes.sort((a, b) => {
+            const order = action.payload === 'A-Z' ? 
+                state.recipes.sort((a, b) => {
                     if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
-                    else return -1
-                    })
-                : state.recipes.sort((a, b) => {
-                    if (a.name.toLowerCase() < b.name.toLowerCase()) return 1
-                    else return -1
-                    })
+                    else return -1}) :
+                action.payload === 'Z-A' ?
+                    state.recipes.sort((a, b) => {
+                        if (a.name.toLowerCase() < b.name.toLowerCase()) return 1
+                        else return -1}) :
+                    state.recipesAll
             return {
                 ...state,
                 recipes: order
@@ -65,15 +66,15 @@ export const rootReducer = (state = initialState, action) => {
                 diets: action.payload
             }
         case ORDER_HEALTH_SCORE:
-            const orderScore = action.payload === 'highest' 
-                ? state.recipes.sort((a, b) => {
+            const orderScore = action.payload === 'highest' ?
+                state.recipesAll.sort((a, b) => {
                     if ((a.healthScore - b.healthScore) < 0) return 1
-                    else return -1                           
-                    }) 
-                : state.recipes.sort((a, b) => {                        
-                    if ((b.healthScore - a.healthScore) < 0) return 1
-                    else return -1
-                    })
+                    else return -1}) :
+                action.payload === 'lowest' ?
+                    state.recipesAll.sort((a, b) => {                        
+                        if ((b.healthScore - a.healthScore) < 0) return 1
+                        else return -1}) :
+                    state.recipes
             return {
                 ...state,
                 recipes: orderScore

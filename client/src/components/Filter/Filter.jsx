@@ -3,30 +3,30 @@ import './filter.css'
 import { useDispatch } from "react-redux";
 import { orderAlphabetically, filterByDiet, orderHealthScore } from '../../Reducers/actions'
 
-function Filter(){
+function Filter({handleOrder, handleHealthOrder, handleDiet}){
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
-    const handleOrder = (event) => {
-        dispatch(orderAlphabetically(event.target.value))
-    }
-    const handleDiet = (event) => {
-        dispatch(filterByDiet(event.target.value))
-    }
-    const handleHealthOrder = (event) => {
-        dispatch(orderHealthScore(event.target.value))
-    }
+    // const handleOrder = (event) => {
+    //     dispatch(orderAlphabetically(event.target.value))
+    // }
+    // const handleDiet = (event) => {
+    //     dispatch(filterByDiet(event.target.value))
+    // }
+    // const handleHealthOrder = (event) => {
+    //     dispatch(orderHealthScore(event.target.value))
+    // }
 
     return(
         <div className="filter">
             <select onChange={(e)=>handleOrder(e)}>
-                <option>Order by:</option>
+                <option value='none'>Order by:</option>
                 <option value='A-Z'>A-Z</option>
                 <option value='Z-A'>Z-A</option>
             </select>
 
             <select onChange={(e)=>handleHealthOrder(e)}>
-                <option>Health Score Order</option>
+                <option value='none'>Health Score Order</option>
                 <option value='highest'>highest health score</option>
                 <option value='lowest'>lowest health score</option>
             </select>
@@ -49,3 +49,5 @@ function Filter(){
 }
 
 export default Filter;
+
+// window.location.reload()

@@ -14,3 +14,6 @@
     background-color: black;
     color: rgb(26, 199, 26);
 }
+.search input{
+    border: none;
+}

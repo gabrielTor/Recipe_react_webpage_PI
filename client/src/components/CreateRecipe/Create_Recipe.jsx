@@ -4,12 +4,13 @@ import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import { createRecipe, getDietTypes } from '../../Reducers/actions'
 import Navbar from '../NavBar/Navbar'
+import { useHistory } from "react-router-dom";
 
 const validate = (input) => {
   const errors = {}
   if (!input.name) {
     errors.name = 'You must enter a name for your recipe!'
-  } else if (/[^a-zA-Z]/g.test(input.name)) {
+  } else if (/[^a-zA-Z ]/g.test(input.name)) {
     errors.name = 'Name could be letters, no symbols!'
   }
   if(!input.summary) {
@@ -23,6 +24,7 @@ const validate = (input) => {
 
 function Create_Recipe() {
 
+  const history = useHistory()
   const diets = useSelector(state => state.diets)
   const dispatch = useDispatch()
   const [errors, setErrors] = useState({})
@@ -33,16 +35,16 @@ function Create_Recipe() {
     steps: '',
     dishTypes: '',
     image: 'https://protkd.com/wp-content/uploads/2017/04/default-image.jpg',
-    diet: []
+    diets: []
   })
 
   useEffect(() => {
     dispatch(getDietTypes())
   }, [])
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const handleSubmit = () => {
     dispatch(createRecipe(input))
+    history.push('/home')
   }
   const handleChange = (event) => {
     setinput({
@@ -58,7 +60,7 @@ function Create_Recipe() {
     if(event.target.checked){
       setinput({
         ...input,
-        diets: [event.target.value]
+        diets: [...input.diets, event.target.value]
       })
     }
   }
@@ -71,19 +73,19 @@ function Create_Recipe() {
       <div className="form">
         <label>Enter a title for your recipe:</label>
         <input className={errors.name && 'danger'} type="text" name="name" value={input.name} onChange={(e)=>handleChange(e)} required/>
-        { errors.name && (<p className="danger">{errors.name}</p>) }
+        {/* { errors.name && (<p className="danger">{errors.name}</p>) } */}
       </div>
       
       <div className="form">
         <label>Summary of recipe:</label>
         <input className={errors.summary && 'danger'} type="textarea" name="summary" value={input.summary} onChange={(e)=>handleChange(e)} required/>
-        { errors.summary && (<p className="danger">{errors.summary}</p>) }
+        {/* { errors.summary && (<p className="danger">{errors.summary}</p>) } */}
       </div>
       
       <div className="form">
         <label>What health score does it have:</label>
         <input className={errors.healthScore && 'danger'} type="number" name="healthScore" value={input.healthScore} onChange={(e)=>handleChange(e)}/>
-        { errors.healthScore && (<p className="danger">{errors.healthScore}</p>) }
+        {/* { errors.healthScore && (<p className="danger">{errors.healthScore}</p>) } */}
       </div>
       
       <div className="form">
@@ -115,7 +117,10 @@ function Create_Recipe() {
         }
       </div>
       
-      <button type="submit">Enter</button>
+      <button disabled={errors.name || errors.summary || errors.healthScore} type="submit">Enter</button>
+      { errors.name && (<p className="danger">{errors.name}</p>) }
+      { errors.summary && (<p className="danger">{errors.summary}</p>) }
+      { errors.healthScore && (<p className="danger">{errors.healthScore}</p>) }
     </form>
     </>
   )

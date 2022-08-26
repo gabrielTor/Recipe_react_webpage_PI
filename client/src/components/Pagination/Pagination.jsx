@@ -14,7 +14,7 @@ function Pagination({ recipesPerPage, totalRecipes, page, nextP, prevP }){
             {
                 pageN?.map(n => { 
                 return (
-                    <li key={n}>
+                    <li className='btn' key={n}>
                         <button onClick={()=>page(n)}>{n}</button>
                     </li>)
                 })

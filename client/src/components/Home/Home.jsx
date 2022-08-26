@@ -3,7 +3,7 @@ import './home.css'
 import Navbar from "../NavBar/Navbar";
 import { useDispatch, useSelector } from 'react-redux'
 import Recipe from '../Recipe/Recpie'
-import { getRecipes, getDietTypes } from '../../Reducers/actions'
+import { getRecipes, getDietTypes, orderAlphabetically, filterByDiet, orderHealthScore } from '../../Reducers/actions'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Pagination from "../Pagination/Pagination";
@@ -36,10 +36,23 @@ function Home() {
     dispatch(getDietTypes())
   }, [dispatch])
 
+  const handleOrder = (event) => {
+    dispatch(orderAlphabetically(event.target.value))
+    setPage(1)
+  }
+  const handleDiet = (event) => {
+    dispatch(filterByDiet(event.target.value))
+    setPage(1)
+  }
+  const handleHealthOrder = (event) => {
+    dispatch(orderHealthScore(event.target.value))
+    setPage(1)
+  }
+
   return (
     <div id="home">
       <Navbar/>
-      <Filter/>
+      <Filter handleOrder={handleOrder} handleHealthOrder={handleHealthOrder} handleDiet={handleDiet}/>
       {
         currentRecipes?.map(r => {
           return(

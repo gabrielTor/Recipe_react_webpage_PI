@@ -4,11 +4,18 @@ import { Link } from 'react-router-dom'
 import Search from '../Search/Search'
 
 function Navbar() {
+
+  const handleReload = () => {
+    if(window.location.href == 'http://localhost:3000/home'){
+      window.location.reload()
+    }
+  }
+
     return (
       <nav>
         <ul className="nav">
           <li className="navList">
-            <Link to='/home'><a>HOME</a></Link>
+            <Link to='/home'><a onClick={()=>handleReload()}>HOME</a></Link>
           </li>
           <li className="navList">
             <Link to='/createRecipe'><a>Create Recipe</a></Link>
