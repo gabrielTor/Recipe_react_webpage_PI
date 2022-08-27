@@ -40,6 +40,8 @@ function Home() {
 
   const handleOrder = (event) => {
     dispatch(orderAlphabetically(event.target.value))
+    currentRecipes = alphaRecipes.slice(indexFirst, indexLast)
+    setPage(1)
   }
   const handleDiet = (event) => {
     dispatch(filterByDiet(event.target.value))
@@ -47,6 +49,8 @@ function Home() {
   }
   const handleHealthOrder = (event) => {
     dispatch(orderHealthScore(event.target.value))
+    currentRecipes = healthRecipes.slice(indexFirst, indexLast)
+    setPage(1)
   }
 
   return (
