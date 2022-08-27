@@ -36,6 +36,8 @@ function Home() {
   useEffect(() => {
     dispatch(getRecipes())
     dispatch(getDietTypes())
+    dispatch(orderAlphabetically())
+    dispatch(orderHealthScore())
   }, [dispatch])
 
   const handleOrder = (event) => {

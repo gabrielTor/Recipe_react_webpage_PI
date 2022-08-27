@@ -1,21 +1,7 @@
 import React from "react";
 import './filter.css'
-import { useDispatch } from "react-redux";
-import { orderAlphabetically, filterByDiet, orderHealthScore } from '../../Reducers/actions'
 
 function Filter({handleOrder, handleHealthOrder, handleDiet}){
-
-    // const dispatch = useDispatch()
-
-    // const handleOrder = (event) => {
-    //     dispatch(orderAlphabetically(event.target.value))
-    // }
-    // const handleDiet = (event) => {
-    //     dispatch(filterByDiet(event.target.value))
-    // }
-    // const handleHealthOrder = (event) => {
-    //     dispatch(orderHealthScore(event.target.value))
-    // }
 
     return(
         <div className="filter">
