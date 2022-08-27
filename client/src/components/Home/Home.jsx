@@ -36,13 +36,10 @@ function Home() {
   useEffect(() => {
     dispatch(getRecipes())
     dispatch(getDietTypes())
-    dispatch(orderAlphabetically())
-    dispatch(orderHealthScore())
   }, [dispatch])
 
   const handleOrder = (event) => {
     dispatch(orderAlphabetically(event.target.value))
-    totalRecipes = alphaRecipes.length
   }
   const handleDiet = (event) => {
     dispatch(filterByDiet(event.target.value))
@@ -50,7 +47,6 @@ function Home() {
   }
   const handleHealthOrder = (event) => {
     dispatch(orderHealthScore(event.target.value))
-    totalRecipes = healthRecipes.length
   }
 
   return (
