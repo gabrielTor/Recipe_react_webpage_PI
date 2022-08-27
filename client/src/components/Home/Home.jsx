@@ -16,6 +16,8 @@ function Home() {
   const dispatch = useDispatch()
   const allRecipes = useSelector(state => state.recipes)
   const recipeFound = useSelector(state => state.recipesByName)
+  const alphaRecipes = useSelector(state => state.alphaRecipes)
+  const healthRecipes = useSelector(state => state.healthRecipes)
  
   const indexLast = page * recipesPerPage
   const indexFirst = indexLast - recipesPerPage
@@ -38,7 +40,7 @@ function Home() {
 
   const handleOrder = (event) => {
     dispatch(orderAlphabetically(event.target.value))
-    setPage(1)
+    totalRecipes = alphaRecipes
   }
   const handleDiet = (event) => {
     dispatch(filterByDiet(event.target.value))
@@ -46,7 +48,7 @@ function Home() {
   }
   const handleHealthOrder = (event) => {
     dispatch(orderHealthScore(event.target.value))
-    setPage(1)
+    totalRecipes = healthRecipes
   }
 
   return (

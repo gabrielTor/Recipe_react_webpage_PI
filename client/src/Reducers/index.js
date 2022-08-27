@@ -14,7 +14,9 @@ let initialState = {
     recipes: [],
     recipeDetail: {},
     diets: [],
-    recipesAll: []
+    recipesAll: [],
+    alphaRecipes: [],
+    healthRecipes: []
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -47,18 +49,24 @@ export const rootReducer = (state = initialState, action) => {
                 recipes: dietsfilter
             }
         case ALPHABETICALLY:
-            const order = action.payload === 'A-Z' ? 
-                state.recipes.sort((a, b) => {
-                    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
-                    else return -1}) :
-                action.payload === 'Z-A' ?
-                    state.recipes.sort((a, b) => {
+            const orderBy = (value) => {
+                if(value === 'A-Z'){
+                    const a_Z = state.recipes.sort((a, b) => {
+                        if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
+                        else return -1})
+                    return a_Z
+                    }
+                else if(value === 'Z-A'){
+                    const z_A = state.recipes.sort((a, b) => {
                         if (a.name.toLowerCase() < b.name.toLowerCase()) return 1
-                        else return -1}) :
-                    state.recipesAll
+                        else return -1})
+                    return z_A
+                    }
+                else return state.recipesAll
+                }
             return {
                 ...state,
-                recipes: order
+                alphaRecipes: orderBy(action.payload)
             }
         case GET_DIET_TYPES:
             return {
@@ -66,18 +74,24 @@ export const rootReducer = (state = initialState, action) => {
                 diets: action.payload
             }
         case ORDER_HEALTH_SCORE:
-            const orderScore = action.payload === 'highest' ?
-                state.recipesAll.sort((a, b) => {
-                    if ((a.healthScore - b.healthScore) < 0) return 1
-                    else return -1}) :
-                action.payload === 'lowest' ?
-                    state.recipesAll.sort((a, b) => {                        
+            const orderhealthScore = (value) => {
+                if(value === 'highest'){
+                    const highest = state.recipes.sort((a, b) => {
+                        if((a.healthScore - b.healthScore) < 0) return 1
+                        else return -1})
+                    return highest
+                    }
+                else if(value === 'lowest'){
+                    const lowest = state.recipes.sort((a, b) => {
                         if ((b.healthScore - a.healthScore) < 0) return 1
-                        else return -1}) :
-                    state.recipes
+                        else return -1})
+                    return lowest
+                    }
+                else return state.recipesAll
+                }
             return {
                 ...state,
-                recipes: orderScore
+                healthRecipes: orderhealthScore(action.payload)
             }
         default: return state
     }
