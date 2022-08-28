@@ -1,6 +1,10 @@
 #form{
     position: static;
+    width: 90%;
+    margin: auto;
     margin-top: 6rem;
+    display: flex;
+    flex-direction: column;
 }
 #form button{
     background-color: aqua;
@@ -9,8 +13,10 @@
     width: 5rem;
     height: 2rem;
     cursor: pointer;
+    margin: auto;
     margin-top: 2rem;
     font-size: large;
+
 }
 .diets{
     display: block;
@@ -19,13 +25,18 @@
     color: red;
 }
 .form{
-    display: block;
-    font-weight: bold;
-    margin: 1rem;
+   margin: 5px;
+   font-weight: bold;
+   display: flex;
+   justify-content: space-between;
+   padding: 0 30%;
 }
-textarea{
-    width: 30%;
-    height: 15%;
+.form input{
+    float: right;
+}
+.form textarea{
+    float: right;
+    width: 10.6rem;
 }
 #dtypes{
     border-style: inset;
@@ -34,6 +45,14 @@ textarea{
     margin: auto;
     font-weight: bold;
 }
+#dtypes input{
+    float: right;
+}
 label{
     margin-right: 2rem;
+}
+@media (width < 700px) {
+    .form{
+        padding: 0 0%;
+    }
 }

@@ -35,5 +35,3 @@ function Filter({handleOrder, handleHealthOrder, handleDiet}){
 }
 
 export default Filter;
-
-// window.location.reload()

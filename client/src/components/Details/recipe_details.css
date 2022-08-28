@@ -1,12 +1,14 @@
 .detailImg{
     max-width: 65%;
-    max-height: 50%px;
+    max-height: 50%;
 }
 .details{
     margin-top: 5rem;
 }
 .details ol{
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 li{
     list-style-type: none;

@@ -1,6 +1,5 @@
 .rCards{
     display: flex;
-    flex-direction: row;
     justify-content: center;
 }
 #home{
@@ -11,7 +10,25 @@
 }
 .rCards a:visited{
     color: black;
+    text-decoration: none;
 }
 .rCards a{
     color: black;
+    text-decoration: none;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+@media (width < 500px) {
+    .grid{
+        display: grid;
+        grid-template-columns: 1fr;
+    }   
+}
+@media (width < 700px) {
+    .grid{
+        display: grid;
+        grid-template-columns: 1fr;
+    }   
 }

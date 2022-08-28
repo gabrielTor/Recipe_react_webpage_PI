@@ -15,8 +15,6 @@ let initialState = {
     recipeDetail: {},
     diets: [],
     recipesAll: [],
-    alphaRecipes: [],
-    healthRecipes: []
 }
 
 export const rootReducer = (state = initialState, action) => {
