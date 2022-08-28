@@ -3,21 +3,19 @@ import './home.css'
 import Navbar from "../NavBar/Navbar";
 import { useDispatch, useSelector } from 'react-redux'
 import Recipe from '../Recipe/Recpie'
-import { getRecipes, getDietTypes, orderAlphabetically, filterByDiet, orderHealthScore } from '../../Reducers/actions'
+import { getRecipes, orderAlphabetically, filterByDiet, orderHealthScore } from '../../Reducers/actions'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Pagination from "../Pagination/Pagination";
 import Filter from "../Filter/Filter";
 
 function Home() {
-
+  const [order, setOrder] = useState('')
   const [page, setPage] = useState(1)
   const recipesPerPage = 9
   const dispatch = useDispatch()
   const allRecipes = useSelector(state => state.recipes)
   const recipeFound = useSelector(state => state.recipesByName)
-  const alphaRecipes = useSelector(state => state.alphaRecipes)
-  const healthRecipes = useSelector(state => state.healthRecipes)
  
   const indexLast = page * recipesPerPage
   const indexFirst = indexLast - recipesPerPage
@@ -35,13 +33,12 @@ function Home() {
 
   useEffect(() => {
     dispatch(getRecipes())
-    dispatch(getDietTypes())
   }, [dispatch])
 
   const handleOrder = (event) => {
     dispatch(orderAlphabetically(event.target.value))
-    currentRecipes = alphaRecipes.slice(indexFirst, indexLast)
     setPage(1)
+    setOrder(event.target.value)
   }
   const handleDiet = (event) => {
     dispatch(filterByDiet(event.target.value))
@@ -49,8 +46,8 @@ function Home() {
   }
   const handleHealthOrder = (event) => {
     dispatch(orderHealthScore(event.target.value))
-    currentRecipes = healthRecipes.slice(indexFirst, indexLast)
     setPage(1)
+    setOrder(event.target.order)
   }
 
   return (

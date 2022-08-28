@@ -66,7 +66,7 @@ export const rootReducer = (state = initialState, action) => {
                 }
             return {
                 ...state,
-                alphaRecipes: orderBy(action.payload)
+                recipes: orderBy(action.payload)
             }
         case GET_DIET_TYPES:
             return {
@@ -91,7 +91,7 @@ export const rootReducer = (state = initialState, action) => {
                 }
             return {
                 ...state,
-                healthRecipes: orderhealthScore(action.payload)
+                recipes: orderhealthScore(action.payload)
             }
         default: return state
     }
