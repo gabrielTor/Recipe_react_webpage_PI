@@ -20,6 +20,7 @@ function Recipe_Details(props) {
       <h1>{details.name}</h1>
       <h4>Summary: {details.summary}</h4>
       <img className="detailImg" src={details.image} alt="recipe"/>
+      <div className="step-container">
       {
         Array.isArray(details.steps) ? 
         <h2>Steps: {details.steps.map(s => (
@@ -29,6 +30,8 @@ function Recipe_Details(props) {
         ))}</h2> :
         <h2>Steps: {details.steps}</h2>
       }
+      </div>
+      <div className="container">
       <h3>Health Score: {details.healthScore}</h3>
       {
         Array.isArray(details.dishTypes) ?
@@ -36,8 +39,9 @@ function Recipe_Details(props) {
         <h3>Dish types: {details.dishTypes}</h3>
       }
       <h3>Diet Type: {details.diets?.map(d => (<ul><li>- {d}</li></ul>))}</h3>
+      </div>
     </div>
   );
 }
   
-  export default Recipe_Details;
+export default Recipe_Details;
