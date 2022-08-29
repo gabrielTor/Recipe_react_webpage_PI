@@ -3,7 +3,9 @@
     background-size: cover;
     height: 38rem;
     width: 100%;
-
+}
+#landing h1{
+    padding-top: 6%;
 }
 .main{
     margin-top: 0;

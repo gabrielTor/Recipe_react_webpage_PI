@@ -10,7 +10,7 @@ import Pagination from "../Pagination/Pagination";
 import Filter from "../Filter/Filter";
 
 function Home() {
-  const [order, setOrder] = useState('')
+  const [updatePage, setUpdatePage] = useState('')
   const [page, setPage] = useState(1)
   const recipesPerPage = 9
   const dispatch = useDispatch()
@@ -38,7 +38,7 @@ function Home() {
   const handleOrder = (event) => {
     dispatch(orderAlphabetically(event.target.value))
     setPage(1)
-    setOrder(event.target.value)
+    setUpdatePage(event.target.value)
   }
   const handleDiet = (event) => {
     dispatch(filterByDiet(event.target.value))
@@ -47,7 +47,7 @@ function Home() {
   const handleHealthOrder = (event) => {
     dispatch(orderHealthScore(event.target.value))
     setPage(1)
-    setOrder(event.target.order)
+    setUpdatePage(event.target.order)
   }
 
   return (

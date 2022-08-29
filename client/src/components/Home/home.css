@@ -3,7 +3,7 @@
     justify-content: center;
 }
 #home{
-    margin-top: 6rem;
+    margin-top: 5.3%;
 }
 #home div{
     margin-bottom: 1rem;
@@ -20,15 +20,21 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
-@media (width < 500px) {
+@media (width < 1000px) {
     .grid{
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+    }
+    #home{
+        margin-top: 8%;
     }   
 }
-@media (width < 700px) {
+@media (width < 750px) {
     .grid{
         display: grid;
         grid-template-columns: 1fr;
-    }   
+    }
+    #home{
+        margin-top: 12%;
+    }
 }
