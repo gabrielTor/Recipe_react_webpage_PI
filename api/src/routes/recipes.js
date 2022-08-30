@@ -9,10 +9,10 @@ const recipeUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${AP
 router.get('/', async (req, res, next) => {
     const { name } = req.query
     try{
-        let spoonApi = await axios.get(recipeUrl)
-        .then(resp => resp.data)
+        const spoonApi = await axios.get(recipeUrl)
+        const response = await spoonApi.data
 
-        let hundredRecipes = spoonApi.results.map(r => {
+        const hundredRecipes = response.results.map(r => {
             return {
                 name: r.title,
                 id: r.id,
@@ -59,7 +59,7 @@ router.get('/:recipeId', async (req, res, next) => {
     const { recipeId } = req.params
     try {
         if(String(recipeId).length === 36){
-            let recipe = await Recipe.findByPk(recipeId)
+            const recipe = await Recipe.findByPk(recipeId)
             let diets = await recipe.getDietTypes()
             diets = diets.map(d => d.dataValues.name)
             if(recipe){
@@ -67,16 +67,17 @@ router.get('/:recipeId', async (req, res, next) => {
             }
         }
         else{
-            let apiRecipeFound = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${API_key}`)
-            let details = {
-                name: apiRecipeFound.data.title,
-                id: apiRecipeFound.data.id,
-                summary: apiRecipeFound.data.summary,
-                steps: apiRecipeFound.data.analyzedInstructions.length ? apiRecipeFound.data.analyzedInstructions[0].steps : "There are no instructions.",
-                healthScore: apiRecipeFound.data.healthScore,
-                image: apiRecipeFound.data.image,
-                dishTypes: apiRecipeFound.data.dishTypes,
-                diets: apiRecipeFound.data.diets
+            const apiRecipeFound = await axios.get(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${API_key}`)
+            const response = await apiRecipeFound.data
+            const details = {
+                name: response.title,
+                id: response.id,
+                summary: response.summary,
+                steps: response.analyzedInstructions.length ? response.analyzedInstructions[0].steps : "There are no instructions.",
+                healthScore: response.healthScore,
+                image: response.image,
+                dishTypes: response.dishTypes,
+                diets: response.diets
             }
             return res.send(details)
         }

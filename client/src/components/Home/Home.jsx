@@ -22,8 +22,8 @@ function Home() {
   let currentRecipes = recipeFound.length ? recipeFound.slice(indexFirst, indexLast) : allRecipes.slice(indexFirst, indexLast)
   const handlePage = (num) => setPage(num)
   
-  let totalRecipes = recipeFound.length ? recipeFound.length : allRecipes.length
-  let numLength = Math.ceil(totalRecipes / recipesPerPage)
+  const totalRecipes = recipeFound.length ? recipeFound.length : allRecipes.length
+  const numLength = Math.ceil(totalRecipes / recipesPerPage)
   const handleNext = () => {
     if(numLength !== page) setPage(page + 1)
   }

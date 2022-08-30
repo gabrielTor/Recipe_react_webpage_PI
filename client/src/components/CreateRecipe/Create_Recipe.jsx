@@ -45,6 +45,7 @@ function Create_Recipe() {
   const handleSubmit = () => {
     dispatch(createRecipe(input))
     history.push('/home')
+    window.location.reload()
   }
   const handleChange = (event) => {
     setinput({
