@@ -7,6 +7,7 @@ import Navbar from "../NavBar/Navbar";
 
 function Recipe_Details(props) {
   
+  let key = 1
   const dispatch = useDispatch()
   const details = useSelector(state => state.recipeDetail)
 
@@ -23,11 +24,9 @@ function Recipe_Details(props) {
       <div className="step-container">
       {
         Array.isArray(details.steps) ? 
-        <h2>Steps: {details.steps.map(s => (
-          <ol>
+        <h2>Steps: <ol>{details.steps.map(s => (
             <li key={s.number}>{s.number + ')' + s.step}</li>
-          </ol>
-        ))}</h2> :
+        ))}</ol></h2> :
         <h2>Steps: {details.steps}</h2>
       }
       </div>
@@ -35,10 +34,10 @@ function Recipe_Details(props) {
       <h3>Health Score: {details.healthScore}</h3>
       {
         Array.isArray(details.dishTypes) ?
-        <h3>Dish types: {details.dishTypes?.map(d => (<ul><li>- {d}</li></ul>))}</h3> :
+        <h3>Dish types: <ul>{details.dishTypes?.map(d => (<li key={key++}>- {d}</li>))}</ul></h3> :
         <h3>Dish types: {details.dishTypes}</h3>
       }
-      <h3>Diet Type: {details.diets?.map(d => (<ul><li>- {d}</li></ul>))}</h3>
+      <h3>Diet Type: <ul>{details.diets?.map(d => (<li key={key++}>- {d}</li>))}</ul></h3>
       </div>
     </div>
   );
