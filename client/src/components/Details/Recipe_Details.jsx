@@ -25,7 +25,7 @@ function Recipe_Details(props) {
         Array.isArray(details.steps) ? 
         <h2>Steps: {details.steps.map(s => (
           <ol>
-            <li>{s.number + ')' + s.step}</li>
+            <li key={s.number}>{s.number + ')' + s.step}</li>
           </ol>
         ))}</h2> :
         <h2>Steps: {details.steps}</h2>

@@ -109,7 +109,7 @@ function Create_Recipe() {
         {
           diets.map(d => {
             return (
-              <label className="diets">
+              <label className="diets" key={d.id}>
               {d.name}
               <input type="checkbox" value={d.name} onChange={(e)=>handleDiet(e)}/>
               </label>
