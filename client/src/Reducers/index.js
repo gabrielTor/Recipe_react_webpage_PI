@@ -74,15 +74,11 @@ export const rootReducer = (state = initialState, action) => {
         case ORDER_HEALTH_SCORE:
             const orderhealthScore = (value) => {
                 if(value === 'highest'){
-                    const highest = state.recipes.sort((a, b) => {
-                        if((a.healthScore - b.healthScore) < 0) return 1
-                        else return -1})
+                    const highest = state.recipes.sort((a, b) => b.healthScore - a.healthScore)
                     return highest
                     }
                 else if(value === 'lowest'){
-                    const lowest = state.recipes.sort((a, b) => {
-                        if ((b.healthScore - a.healthScore) < 0) return 1
-                        else return -1})
+                    const lowest = state.recipes.sort((a, b) => a.healthScore - b.healthScore)
                     return lowest
                     }
                 else return state.recipesAll
