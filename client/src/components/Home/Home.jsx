@@ -53,7 +53,11 @@ function Home() {
   return (
     <div id="home">
       <Navbar/>
-      <Filter handleOrder={handleOrder} handleHealthOrder={handleHealthOrder} handleDiet={handleDiet}/>
+      <Filter 
+        handleOrder={handleOrder} 
+        handleHealthOrder={handleHealthOrder} 
+        handleDiet={handleDiet}/>
+
       <div className="grid">
       {
         currentRecipes?.map(r => {
@@ -71,9 +75,9 @@ function Home() {
         })
       }
       </div>
+      
       <Pagination 
-        recipesPerPage={recipesPerPage} 
-        totalRecipes={totalRecipes} 
+        numLength={numLength} 
         page={handlePage}
         nextP={handleNext}
         prevP={handlePrev}/>

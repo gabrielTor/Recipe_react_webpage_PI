@@ -1,9 +1,8 @@
 import React from "react";
 import './pagination.css'
 
-function Pagination({ recipesPerPage, totalRecipes, page, nextP, prevP }){
+function Pagination({ page, nextP, prevP, numLength }){
     const pageN = []
-    let numLength = Math.ceil(totalRecipes / recipesPerPage)
     for (let i = 1; i <= numLength; i++) {
         pageN.push(i)
     }
