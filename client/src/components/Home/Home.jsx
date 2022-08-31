@@ -33,6 +33,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(getRecipes())
+    return () => dispatch(getRecipes()) 
   }, [dispatch])
 
   const handleOrder = (event) => {
