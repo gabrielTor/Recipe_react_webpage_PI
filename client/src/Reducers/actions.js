@@ -11,25 +11,15 @@ export const ORDER_HEALTH_SCORE = "ORDER_HEALTH_SCORE"
 
 export const getRecipes = () => {
     return async (dispatch) => {
-        try{
-            const response = await axios.get('http://localhost:3001/recipes')
-            return dispatch({ type: GET_ALL_RECIPES, payload: response.data })
-        }
-        catch(err){
-            console.log(err)
-        }
+        const response = await axios.get('http://localhost:3001/recipes')
+        return dispatch({ type: GET_ALL_RECIPES, payload: response.data })
     }
 }
 
 export const getRecipesByName = (name) => {
     return async (dispatch) => {
-        try{
-            const response = await axios.get(`http://localhost:3001/recipes?name=${name}`)
-            return dispatch({ type: GET_RECIPES_BY_NAME, payload: response.data })
-        }
-        catch(err){
-            console.log(err)
-        }
+        const response = await axios.get(`http://localhost:3001/recipes?name=${name}`)
+        return dispatch({ type: GET_RECIPES_BY_NAME, payload: response.data })
     }
 }
 
