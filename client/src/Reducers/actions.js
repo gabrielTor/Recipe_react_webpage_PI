@@ -8,6 +8,7 @@ export const FILTER_BY_DIET = "FILTER_BY_DIET"
 export const ALPHABETICALLY = "ALPHABETICALLY"
 export const GET_DIET_TYPES = "GET_DIET_TYPES"
 export const ORDER_HEALTH_SCORE = "ORDER_HEALTH_SCORE"
+export const CLEARDETAILS = "CLEARDETAILS"
 
 export const getRecipes = () => {
     return async (dispatch) => {
@@ -62,5 +63,11 @@ export const orderHealthScore = (value) => {
     return {
         type: ORDER_HEALTH_SCORE,
         payload: value
+    }
+}
+
+export const clearDetails = () => {
+    return {
+        type: CLEARDETAILS
     }
 }

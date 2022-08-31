@@ -6,7 +6,8 @@ import {
     FILTER_BY_DIET, 
     ALPHABETICALLY,
     ORDER_HEALTH_SCORE,
-    GET_DIET_TYPES 
+    GET_DIET_TYPES,
+    CLEARDETAILS
 } from "./actions";
 
 let initialState = {
@@ -86,6 +87,11 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: orderhealthScore(action.payload)
+            }
+        case CLEARDETAILS:
+            return {
+                ...state,
+                recipeDetail: {}
             }
         default: return state
     }

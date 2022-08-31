@@ -2,7 +2,7 @@ import React from "react";
 import './recipe_details.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getRecipeDetail } from '../../Reducers/actions'
+import { getRecipeDetail, clearDetails } from '../../Reducers/actions'
 import Navbar from "../NavBar/Navbar";
 
 function Recipe_Details(props) {
@@ -13,6 +13,8 @@ function Recipe_Details(props) {
 
   useEffect(()=>{
     dispatch(getRecipeDetail(props.match.params.id))
+
+    return ()=> dispatch(clearDetails())
   }, [])
 
   return (
