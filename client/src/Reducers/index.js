@@ -39,7 +39,6 @@ export const rootReducer = (state = initialState, action) => {
         case CREATE_RECIPE:
             return {
                 ...state,
-                recipes: state.recipes.concat(action.peyload)
             }
         case FILTER_BY_DIET:
             let dietsfilter = action.payload === 'none' ? state.recipesAll : state.recipesAll.filter(r => r.diets.includes(action.payload))
