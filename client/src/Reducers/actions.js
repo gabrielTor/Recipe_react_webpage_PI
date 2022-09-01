@@ -12,35 +12,35 @@ export const CLEARDETAILS = "CLEARDETAILS"
 
 export const getRecipes = () => {
     return async (dispatch) => {
-        const response = await axios.get('http://localhost:3001/recipes')
+        const response = await axios.get('/recipes')
         return dispatch({ type: GET_ALL_RECIPES, payload: response.data })
     }
 }
 
 export const getRecipesByName = (name) => {
     return async (dispatch) => {
-        const response = await axios.get(`http://localhost:3001/recipes?name=${name}`)
+        const response = await axios.get(`/recipes?name=${name}`)
         return dispatch({ type: GET_RECIPES_BY_NAME, payload: response.data })
     }
 }
 
 export const getRecipeDetail = (id) => {
     return async (dispatch) => {
-        const response = await axios.get(`http://localhost:3001/recipes/${id}`)
+        const response = await axios.get(`/recipes/${id}`)
         return dispatch({ type: GET_RECIPE_DETAIL, payload: response.data })
     }
 }
 
 export const createRecipe = (value) => {
     return async (dispatch) => {
-        await axios.post('http://localhost:3001/recipes', value)
+        await axios.post('/recipes', value)
         return dispatch({type: CREATE_RECIPE})
     }
 }
 
 export const getDietTypes = () => {
     return async (dispatch) => {
-        const response = await axios.get('http://localhost:3001/diets')
+        const response = await axios.get('/diets')
         return dispatch({type: GET_DIET_TYPES, payload: response.data})
     }
 }
