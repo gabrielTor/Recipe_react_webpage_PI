@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
                 // diets: r.diets
             }
         })
-        await Recipe.bulkCreate(hundredRecipes)
+        // await Recipe.bulkCreate(hundredRecipes)
 
         const recipeDB = await Recipe.findAll({ include: DietTypes })
         let dbRecipes = await recipeDB?.map(r => {
