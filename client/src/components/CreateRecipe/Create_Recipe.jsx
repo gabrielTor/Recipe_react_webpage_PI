@@ -10,7 +10,7 @@ const validate = (input) => {
   const errors = {}
   if (!input.name) {
     errors.name = 'You must enter a name for your recipe!'
-  } else if (/[^a-zA-Z ]/g.test(input.name)) {
+  } else if (/[^a-zA-Z, ]/g.test(input.name)) {
     errors.name = 'Name could be letters, no symbols!'
   }
   if(!input.summary) {
