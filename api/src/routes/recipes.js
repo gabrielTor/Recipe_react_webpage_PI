@@ -9,21 +9,21 @@ const recipeUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${AP
 router.get('/', async (req, res, next) => {
     const { name } = req.query
     try{
-        // const spoonApi = await axios.get(recipeUrl)
-        // const response = await spoonApi.data
+        const spoonApi = await axios.get(recipeUrl)
+        const response = await spoonApi.data
 
-        // const hundredRecipes = response.results.map(r => {
-        //     return {
-        //         name: r.title,
-        //         summary: r.summary,
-        //         steps: r.analyzedInstructions.length ? r.analyzedInstructions[0].steps : "There are no instructions.",
-        //         healthScore: r.healthScore,
-        //         image: r.image,
-        //         dishTypes: r.dishTypes,
-        //         diets: r.diets
-        //     }
-        // })
-        // await Recipe.bulkCreate(hundredRecipes)
+        const hundredRecipes = response.results.map(r => {
+            return {
+                name: r.title,
+                summary: r.summary,
+                // steps: r.analyzedInstructions.length ? r.analyzedInstructions[0].steps : "There are no instructions.",
+                healthScore: r.healthScore,
+                image: r.image,
+                // dishTypes: r.dishTypes,
+                // diets: r.diets
+            }
+        })
+        await Recipe.bulkCreate(hundredRecipes)
 
         const recipeDB = await Recipe.findAll({ include: DietTypes })
         let dbRecipes = await recipeDB?.map(r => {
