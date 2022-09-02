@@ -39,6 +39,7 @@ router.get('/', async (req, res, next) => {
                 diets: r.dietTypes.map(d => d.name)
             }
         })
+        dbRecipes.reverse()
         let allRecipes = [...dbRecipes]
 
         if(name){
