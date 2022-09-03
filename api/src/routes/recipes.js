@@ -108,8 +108,20 @@ router.post('/', async (req, res, next) => {
             where:{ name: diets }
         })
         newRecipe.addDietTypes(dietDb)
-        res.send('ok')
+        res.send('recipe created and added to database')
 
+    } catch (err) {
+        next(err)
+    }
+})
+
+
+
+router.delete('/:id', async (req, res) =>{
+    const {id} = req.params
+    try {
+        await Recipe.destroy({where: { id: id }})
+        res.send('recipe deleted')
     } catch (err) {
         next(err)
     }

@@ -9,6 +9,7 @@ export const ALPHABETICALLY = "ALPHABETICALLY"
 export const GET_DIET_TYPES = "GET_DIET_TYPES"
 export const ORDER_HEALTH_SCORE = "ORDER_HEALTH_SCORE"
 export const CLEARDETAILS = "CLEARDETAILS"
+export const DELETERECIPE = "DELETERECIPE"
 
 export const getRecipes = () => {
     return async (dispatch) => {
@@ -28,6 +29,13 @@ export const getRecipeDetail = (id) => {
     return async (dispatch) => {
         const response = await axios.get(`/recipes/${id}`)
         return dispatch({ type: GET_RECIPE_DETAIL, payload: response.data })
+    }
+}
+
+export const deleteRecipe = (id) => {
+    return async (disptach) => {
+        await axios.delete(`/recipes/${id}`)
+        return disptach({ type: DELETERECIPE })
     }
 }
 

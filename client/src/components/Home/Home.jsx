@@ -3,7 +3,7 @@ import './home.css'
 import Navbar from "../NavBar/Navbar";
 import { useDispatch, useSelector } from 'react-redux'
 import Recipe from '../Recipe/Recpie'
-import { getRecipes, orderAlphabetically, filterByDiet, orderHealthScore } from '../../Reducers/actions'
+import { getRecipes, orderAlphabetically, filterByDiet, orderHealthScore, clearDetails } from '../../Reducers/actions'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Pagination from "../Pagination/Pagination";
@@ -33,7 +33,10 @@ function Home() {
 
   useEffect(() => {
     dispatch(getRecipes())
-    return () => dispatch(getRecipes()) 
+    return () => {
+      dispatch(clearDetails())
+      dispatch(getRecipes()) 
+    }
   }, [dispatch])
 
   const handleOrder = (event) => {

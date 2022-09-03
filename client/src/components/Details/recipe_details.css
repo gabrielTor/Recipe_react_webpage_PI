@@ -24,3 +24,18 @@ li{
 .step-container li{
     padding: 2%;
 }
+#delete{
+    background-color: rgba(249, 0, 0, 0.822);
+    border: none;
+    border-radius: 1rem;
+    width: 7rem;
+    height: 3rem;
+    margin: 2rem;
+    margin-top: 6rem;
+}
+#delete:hover{
+    width: 8rem;
+    height: 3.5rem;
+    cursor: pointer;
+    color: white;
+}

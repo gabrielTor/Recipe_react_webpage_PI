@@ -2,20 +2,27 @@ import React from "react";
 import './recipe_details.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getRecipeDetail, clearDetails } from '../../Reducers/actions'
+import { getRecipeDetail, clearDetails, deleteRecipe } from '../../Reducers/actions'
 import Navbar from "../NavBar/Navbar";
+import { useHistory } from 'react-router-dom'
 
 function Recipe_Details(props) {
-  
+
   let key = 1
   const dispatch = useDispatch()
   const details = useSelector(state => state.recipeDetail)
+  const history = useHistory()
 
   useEffect(()=>{
     dispatch(getRecipeDetail(props.match.params.id))
 
     return ()=> dispatch(clearDetails())
   }, [])
+
+  const handleDelete = () => {
+    dispatch(deleteRecipe(props.match.params.id))
+    history.push('/home')
+  }
 
   return (
     <div className="details">
@@ -41,6 +48,8 @@ function Recipe_Details(props) {
       }
       <h3>Diet Type: <ul>{details.diets?.map(d => (<li key={key++}>- {d}</li>))}</ul></h3>
       </div>
+
+      <button id='delete' onClick={()=>handleDelete()} >Delete Recipe</button>
     </div>
   );
 }
