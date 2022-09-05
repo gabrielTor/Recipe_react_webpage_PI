@@ -27,3 +27,49 @@
     border-radius: 4rem;
     color: blue;
 }
+@media (width < 400px) {
+    @media (height < 700px ) {
+        #landing{
+            background-image: url(./background.png);
+            background-size: cover;
+            height: 50rem;
+            width: 100%;
+        }
+    }
+    @media (height < 900px ) {
+        #landing{
+            background-image: url(./background.png);
+            background-size: cover;
+            height: 55rem;
+            width: 100%;
+        }
+    }
+}
+@media (width < 500px) {
+    @media (height < 700px ) {
+        #landing{
+            background-image: url(./background.png);
+            background-size: cover;
+            height: 50rem;
+            width: 100%;
+        }
+    }
+    @media (height < 920px ) {
+        #landing{
+            background-image: url(./background.png);
+            background-size: cover;
+            height: 57rem;
+            width: 100%;
+        }
+    }
+}
+@media (width < 800px) {
+    @media (height < 1030px ) {
+        #landing{
+            background-image: url(./background.png);
+            background-size: cover;
+            height: 64rem;
+            width: 100%;
+        }
+    }
+}

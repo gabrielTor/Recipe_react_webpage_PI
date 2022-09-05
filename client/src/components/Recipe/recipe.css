@@ -23,3 +23,9 @@
     margin-bottom: 0;
     height: 12%;
 }
+@media (width < 400) {
+    .card{
+        width: 18rem;
+        height: 20rem;
+    }
+}

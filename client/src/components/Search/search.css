@@ -17,3 +17,9 @@
 .search input{
     border: none;
 }
+@media (width < 400px) {
+    .search{
+        border-style: none;
+        float: none;
+    }
+}

@@ -26,3 +26,11 @@
 .navList a:hover{
     background-color: #111;
 }
+@media (width < 400px) {
+    .navSearch{
+        display: flex;
+    }
+    .navList a{
+        padding: 9px 12px;
+    }
+}
