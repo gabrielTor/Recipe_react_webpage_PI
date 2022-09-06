@@ -49,7 +49,7 @@ function Recipe_Details(props) {
       <h3>Diet Type: <ul>{details.diets?.map(d => (<li key={key++}>- {d}</li>))}</ul></h3>
       </div>
 
-      <button id='delete' onClick={()=>handleDelete()} >Delete Recipe</button>
+      <button id='delete' disabled={true} onClick={()=>handleDelete()} >Delete Recipe</button>
     </div>
   );
 }
