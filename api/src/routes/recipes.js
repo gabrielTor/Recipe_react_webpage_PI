@@ -117,7 +117,52 @@ router.post('/', async (req, res, next) => {
 
 
 
-router.delete('/:id', async (req, res) =>{
+router.put('/:id', async (req, res, next) =>{
+    const {id} = req.params
+    const { name, summary, steps, healthScore, image, diets, dishTypes } = req.body
+    try{
+        await Recipe.upsert({
+            id: id,
+            name: name,
+            summary: summary,
+            steps: steps,
+            healthScore: healthScore,
+            image: image,
+            dishTypes: dishTypes,
+            diets: diets
+        })
+        res.send(`recipe id ${id} was changed`)
+    } catch(err) {
+        next(err)
+    }
+})
+
+
+// router.put('/:id', async (req, res, next) =>{
+//     const {id} = req.params
+//     const { name, summary, steps, healthScore, image, diets, dishTypes } = req.body
+//     try{
+//         let updatedRecipe = await Recipe.upsert({
+//             id: id,
+//             name: name,
+//             summary: summary,
+//             steps: steps,
+//             healthScore: healthScore,
+//             image: image,
+//             dishTypes: dishTypes
+//         })
+//         const changeDiets = await DietTypes.findAll({
+//             where: { name: diets }
+//         })
+//         await updatedRecipe.setDietTypes(changeDiets)
+//         res.send(`recipe id ${id} was changed`)
+//     } catch(err) {
+//         next(err)
+//     }
+// })
+
+
+router.delete('/:id', async (req, res, next) =>{
     const {id} = req.params
     try {
         await Recipe.destroy({where: { id: id }})
