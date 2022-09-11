@@ -34,12 +34,10 @@ function Home() {
 
   useEffect(() => {
     setIsLoading(true)
-    dispatch(getRecipes())
-    setIsLoading(false)
-    // setTimeout(()=>{
-    //   dispatch(getRecipes())
-    //   setIsLoading(false)
-    // }, 1000)
+    setTimeout(()=>{
+      dispatch(getRecipes())
+      setIsLoading(false)
+    }, 1000)
 
     return () => {
       dispatch(clearDetails())
