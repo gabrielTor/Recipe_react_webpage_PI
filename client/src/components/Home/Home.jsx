@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Pagination from "../Pagination/Pagination";
 import Filter from "../Filter/Filter";
+import Loading from '../Loading/Loading'
 
 function Home() {
   const [updatePage, setUpdatePage] = useState('')
@@ -16,7 +17,7 @@ function Home() {
   const dispatch = useDispatch()
   const allRecipes = useSelector(state => state.recipes)
   const recipeFound = useSelector(state => state.recipesByName)
- 
+  const [isLoading, setIsLoading] = useState(false);
   const indexLast = page * recipesPerPage
   const indexFirst = indexLast - recipesPerPage
   let currentRecipes = recipeFound.length ? recipeFound.slice(indexFirst, indexLast) : allRecipes.slice(indexFirst, indexLast)
@@ -32,7 +33,14 @@ function Home() {
   }
 
   useEffect(() => {
+    setIsLoading(true)
     dispatch(getRecipes())
+    setIsLoading(false)
+    // setTimeout(()=>{
+    //   dispatch(getRecipes())
+    //   setIsLoading(false)
+    // }, 1000)
+
     return () => {
       dispatch(clearDetails())
       dispatch(getRecipes()) 
@@ -62,6 +70,7 @@ function Home() {
         handleHealthOrder={handleHealthOrder} 
         handleDiet={handleDiet}/>
 
+      {isLoading ? <Loading/> :
       <div className="grid">
       {
         currentRecipes?.map(r => {
@@ -79,7 +88,7 @@ function Home() {
         })
       }
       </div>
-      
+      }
       <Pagination 
         numLength={numLength} 
         page={handlePage}
