@@ -1,9 +1,8 @@
 import React from "react";
-import './create_recipe.css'
+import './editRecipe.css'
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { createRecipe, getDietTypes } from '../../Reducers/actions'
-import Navbar from '../NavBar/Navbar'
+import { editRe, getDietTypes } from '../../Reducers/actions'
 import { useHistory } from "react-router-dom";
 
 const validate = (input) => {
@@ -22,19 +21,20 @@ const validate = (input) => {
   return errors
 }
 
-function Create_Recipe() {
+function EditRecipe(props) {
 
   const history = useHistory()
   const diets = useSelector(state => state.diets)
+  const details = useSelector(state => state.recipeDetail)
   const dispatch = useDispatch()
   const [errors, setErrors] = useState({})
   const [input, setinput] = useState({
-    name: '',
-    summary: '',
-    healthScore: 0,
-    steps: '',
-    dishTypes: '',
-    image: '',
+    name: details.name,
+    summary: details.summary,
+    healthScore: details.healthScore,
+    steps: details.steps,
+    dishTypes: details.dishTypes,
+    image: details.image,
     diets: []
   })
 
@@ -43,7 +43,7 @@ function Create_Recipe() {
   }, [])
 
   const handleSubmit = () => {
-    dispatch(createRecipe(input))
+    dispatch(editRe(props.match.params.id, input))
     history.push('/home')
   }
   const handleChange = (event) => {
@@ -64,28 +64,27 @@ function Create_Recipe() {
       })
     }
   }
+  const handleCancel = () => {
+    history.push(`/home/${props.match.params.id}`)
+  }
 
   return (
-    <>
-    <Navbar/>
-
+    <div className="edit">
+    <button onClick={()=>{handleCancel()}}>Cancel</button>
     <form id='form' onSubmit={(e)=>handleSubmit(e)}>
       <div className="form">
         <label>Enter a title for your recipe:</label>
         <input className={errors.name && 'danger'} type="text" name="name" value={input.name} onChange={(e)=>handleChange(e)} required/>
-        {/* { errors.name && (<p className="danger">{errors.name}</p>) } */}
       </div>
       
       <div className="form">
         <label>Summary of recipe:</label>
         <input className={errors.summary && 'danger'} type="textarea" name="summary" value={input.summary} onChange={(e)=>handleChange(e)} required/>
-        {/* { errors.summary && (<p className="danger">{errors.summary}</p>) } */}
       </div>
       
       <div className="form">
         <label>What health score does it have:</label>
         <input className={errors.healthScore && 'danger'} type="number" name="healthScore" value={input.healthScore} onChange={(e)=>handleChange(e)}/>
-        {/* { errors.healthScore && (<p className="danger">{errors.healthScore}</p>) } */}
       </div>
       
       <div className="form">
@@ -122,8 +121,8 @@ function Create_Recipe() {
       { errors.summary && (<p className="danger">{errors.summary}</p>) }
       { errors.healthScore && (<p className="danger">{errors.healthScore}</p>) }
     </form>
-    </>
+    </div>
   )
 }
   
-export default Create_Recipe;
+export default EditRecipe;

@@ -10,6 +10,7 @@ export const GET_DIET_TYPES = "GET_DIET_TYPES"
 export const ORDER_HEALTH_SCORE = "ORDER_HEALTH_SCORE"
 export const CLEARDETAILS = "CLEARDETAILS"
 export const DELETERECIPE = "DELETERECIPE"
+export const EDIT_RECIPE = "EDIT_RECIPE"
 
 export const getRecipes = () => {
     return async (dispatch) => {
@@ -77,5 +78,12 @@ export const orderHealthScore = (value) => {
 export const clearDetails = () => {
     return {
         type: CLEARDETAILS
+    }
+}
+
+export const editRe = (id, value) => {
+    return async (dispatch) => {
+        await axios.put(`/recipes/edit/${id}`, value)
+        return dispatch({type: EDIT_RECIPE})
     }
 }

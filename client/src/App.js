@@ -4,6 +4,7 @@ import Home from './components/Home/Home'
 import Create_Recipe from './components/CreateRecipe/Create_Recipe'
 import Recipe_Details from './components/Details/Recipe_Details'
 import LandingP from './components/LandingP/LandingP'
+import EditRecipe from './components/Details/EditRecipe';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Route exact path='/home' component={Home}/>
       <Route path='/createRecipe' component={Create_Recipe}/>
       <Route path='/home/:id' component={Recipe_Details}/>
+      <Route path='/home/edit/:id' component={EditRecipe}/>
     </div>
   );
 }

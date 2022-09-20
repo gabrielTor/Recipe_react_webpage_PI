@@ -100,7 +100,7 @@ router.post('/', async (req, res, next) => {
             summary,
             steps,
             healthScore,
-            image,
+            image: image ? image : 'https://protkd.com/wp-content/uploads/2017/04/default-image.jpg',
             dishTypes
         })
 
@@ -117,49 +117,30 @@ router.post('/', async (req, res, next) => {
 
 
 
-router.put('/:id', async (req, res, next) =>{
+router.put('/edit/:id', async (req, res, next) =>{
     const {id} = req.params
     const { name, summary, steps, healthScore, image, diets, dishTypes } = req.body
     try{
+        let updatedRecipe = await Recipe.findByPk(id)
         await Recipe.upsert({
             id: id,
-            name: name,
-            summary: summary,
-            steps: steps,
-            healthScore: healthScore,
-            image: image,
-            dishTypes: dishTypes,
-            diets: diets
+            name,
+            summary,
+            steps,
+            healthScore,
+            image,
+            dishTypes
         })
+        const changeDiets = await DietTypes.findAll({
+            where: { name: diets }
+        })
+        await updatedRecipe.setDietTypes(changeDiets)
         res.send(`recipe id ${id} was changed`)
     } catch(err) {
         next(err)
     }
 })
 
-
-// router.put('/:id', async (req, res, next) =>{
-//     const {id} = req.params
-//     const { name, summary, steps, healthScore, image, diets, dishTypes } = req.body
-//     try{
-//         let updatedRecipe = await Recipe.upsert({
-//             id: id,
-//             name: name,
-//             summary: summary,
-//             steps: steps,
-//             healthScore: healthScore,
-//             image: image,
-//             dishTypes: dishTypes
-//         })
-//         const changeDiets = await DietTypes.findAll({
-//             where: { name: diets }
-//         })
-//         await updatedRecipe.setDietTypes(changeDiets)
-//         res.send(`recipe id ${id} was changed`)
-//     } catch(err) {
-//         next(err)
-//     }
-// })
 
 
 router.delete('/:id', async (req, res, next) =>{

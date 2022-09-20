@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getRecipeDetail, clearDetails, deleteRecipe } from '../../Reducers/actions'
 import Navbar from "../NavBar/Navbar";
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 function Recipe_Details(props) {
 
@@ -27,7 +27,10 @@ function Recipe_Details(props) {
   return (
     <div className="details">
       <Navbar/>
-      <h1>{details.name}</h1>
+      <h1>{details.name}</h1> 
+      <button>
+        <Link to={`/home/edit/${details.id}`}>Edit</Link>
+      </button>
       <h4>Summary: {details.summary}</h4>
       <img className="detailImg" src={details.image} alt="recipe"/>
       <div className="step-container">
@@ -49,7 +52,7 @@ function Recipe_Details(props) {
       <h3>Diet Type: <ul>{details.diets?.map(d => (<li key={key++}>- {d}</li>))}</ul></h3>
       </div>
 
-      <button id='delete' disabled={true} onClick={()=>handleDelete()} >Delete Recipe</button>
+      <button id='delete' disabled={false} onClick={()=>handleDelete()} >Delete Recipe</button>
     </div>
   );
 }

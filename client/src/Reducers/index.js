@@ -8,7 +8,8 @@ import {
     ORDER_HEALTH_SCORE,
     GET_DIET_TYPES,
     CLEARDETAILS,
-    DELETERECIPE
+    DELETERECIPE,
+    EDIT_RECIPE
 } from "./actions";
 
 let initialState = {
@@ -97,6 +98,10 @@ export const rootReducer = (state = initialState, action) => {
         case DELETERECIPE:
             return {
                 ...state
+            }
+        case EDIT_RECIPE:
+            return {
+                ...state,
             }
         default: return state
     }
