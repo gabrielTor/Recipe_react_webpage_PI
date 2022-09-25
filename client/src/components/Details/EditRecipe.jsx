@@ -2,7 +2,7 @@ import React from "react";
 import './editRecipe.css'
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { editRe, getDietTypes } from '../../Reducers/actions'
+import { editRe, getDietTypes, showOrHide } from '../../Reducers/actions'
 import { useHistory } from "react-router-dom";
 
 const validate = (input) => {
@@ -44,6 +44,7 @@ function EditRecipe(props) {
 
   const handleSubmit = () => {
     dispatch(editRe(props.match.params.id, input))
+    dispatch(showOrHide(false))
     history.push('/home')
   }
   const handleChange = (event) => {
@@ -65,6 +66,7 @@ function EditRecipe(props) {
     }
   }
   const handleCancel = () => {
+    dispatch(showOrHide(false))
     history.push(`/home/${props.match.params.id}`)
   }
 

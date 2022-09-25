@@ -2,7 +2,7 @@ import React from "react";
 import './recipe_details.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getRecipeDetail, clearDetails, deleteRecipe } from '../../Reducers/actions'
+import { getRecipeDetail, clearDetails, deleteRecipe, showOrHide } from '../../Reducers/actions'
 import Navbar from "../NavBar/Navbar";
 import { useHistory, Link } from 'react-router-dom'
 
@@ -11,8 +11,9 @@ function Recipe_Details(props) {
   let key = 1
   const dispatch = useDispatch()
   const details = useSelector(state => state.recipeDetail)
+  const hideComp = useSelector(state => state.hide)
   const history = useHistory()
-
+  
   useEffect(()=>{
     dispatch(getRecipeDetail(props.match.params.id))
 
@@ -24,11 +25,16 @@ function Recipe_Details(props) {
     history.push('/home')
   }
 
+  const handleShow = () => {
+    dispatch(showOrHide(true))
+  }
+
   return (
+    <>{!hideComp ? 
     <div className="details">
       <Navbar/>
       <h1>{details.name}</h1> 
-      <button>
+      <button onClick={handleShow}>
         <Link to={`/home/edit/${details.id}`}>Edit</Link>
       </button>
       <h4>Summary: {details.summary}</h4>
@@ -53,7 +59,8 @@ function Recipe_Details(props) {
       </div>
 
       <button id='delete' disabled={false} onClick={()=>handleDelete()} >Delete Recipe</button>
-    </div>
+    </div> : <></>}
+    </>
   );
 }
   

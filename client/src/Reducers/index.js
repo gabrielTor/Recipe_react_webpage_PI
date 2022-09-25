@@ -9,7 +9,8 @@ import {
     GET_DIET_TYPES,
     CLEARDETAILS,
     DELETERECIPE,
-    EDIT_RECIPE
+    EDIT_RECIPE,
+    SHOW
 } from "./actions";
 
 let initialState = {
@@ -18,6 +19,7 @@ let initialState = {
     recipeDetail: {},
     diets: [],
     recipesAll: [],
+    hide: false
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -102,6 +104,11 @@ export const rootReducer = (state = initialState, action) => {
         case EDIT_RECIPE:
             return {
                 ...state,
+            }
+        case SHOW:
+            return {
+                ...state,
+                hide: action.payload
             }
         default: return state
     }
