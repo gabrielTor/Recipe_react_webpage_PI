@@ -6,7 +6,7 @@ import Search from '../Search/Search'
 function Navbar() {
 
   const handleReload = () => {
-    if(window.location.href === 'http://localhost:3000/home'){
+    if(window.location.href === 'https://recipe-react-webpage-pi.vercel.app/home'){
       window.location.reload()
     }
   }
