@@ -34,10 +34,13 @@ function Recipe_Details(props) {
     <div className="details">
       <Navbar/>
       <h1>{details.name}</h1> 
-      <button onClick={handleShow}>
-        <Link to={`/home/edit/${details.id}`}>Edit</Link>
-      </button>
-      <h4>Summary: {details.summary}</h4>
+      <Link to={`/home/edit/${details.id}`}>
+        <button onClick={handleShow}>
+          Edit
+        </button>
+      </Link>
+      <h4>Summary:</h4>
+      <h3 dangerouslySetInnerHTML={{__html: details.summary,}}/>
       <img className="detailImg" src={details.image} alt="recipe"/>
       <div className="step-container">
       {
@@ -58,7 +61,7 @@ function Recipe_Details(props) {
       <h3>Diet Type: <ul>{details.diets?.map(d => (<li key={key++}>- {d}</li>))}</ul></h3>
       </div>
 
-      <button id='delete' disabled={false} onClick={()=>handleDelete()} >Delete Recipe</button>
+      <button id='delete' disabled={false} onClick={()=>handleDelete()}>Delete Recipe</button>
     </div> : <></>}
     </>
   );
