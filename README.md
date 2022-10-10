@@ -11,7 +11,7 @@ https://recipe-react-webpage-pi.vercel.app/
 
 **Environment Variables**
 
-To run this project, you will need to dwonload postgreSQL and add the following environment variables to your .env file:
+To run this project, you will need to dwonload postgreSQL, create database named "food" and add the following environment variables to your .env file:
 
 **API**
 
