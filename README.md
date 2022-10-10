@@ -14,7 +14,7 @@ https://recipe-react-webpage-pi.vercel.app/
 
 Tech Stack:
 <ul>
-<li>PosrgreSQL</li>
+<li>PostgreSQL</li>
 <li>Sequelize</li>
 <li>NodeJS</li>
 <li>ReactJS</li>
