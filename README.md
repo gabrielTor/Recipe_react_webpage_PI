@@ -6,3 +6,21 @@ https://spoonacular-api-project.herokuapp.com/home
 <br>
 webpage with database:
 https://recipe-react-webpage-pi.vercel.app/
+
+**Environment Variables**
+
+To run this project, you will need to dwonload postgreSQL and add the following environment variables to your .env file:
+
+**API**
+
+`DB_USER=`
+<br>
+`DB_PASSWORD=`
+<br>
+`DB_HOST=localhost`
+<br>
+`PORT=3001`
+<br>
+`API_key=` you should generate your own API key here on this page <a href="https://spoonacular.com/food-api">spoonacular.com</a>
+
+npm install on api and client directories.
