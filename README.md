@@ -12,6 +12,14 @@ https://spoonacular-api-project.herokuapp.com/home
 webpage with database:
 https://recipe-react-webpage-pi.vercel.app/
 
+Tech Stack:
+<ul>
+<li>PosrgreSQL</li>
+<li>Sequelize</li>
+<li>NodeJS</li>
+<li>ReactJS</li>
+<li>CSS</li>
+</ul>
 **Environment Variables**
 
 To run this project, you will need to dwonload postgreSQL, create database named "food" and add the following environment variables to your .env file:
