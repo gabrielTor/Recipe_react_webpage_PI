@@ -1,4 +1,7 @@
 # Recipe_react_webpage_PI
+The main idea for this application was to visualize different recipes and/or create new ones.
+The information comes from the spoonacular API.
+In this app you can also search any recipe by its name, filter by type, order them by A-Z or Z-A, and order by ascendent or descendent thier health score thus achieving to find the healthiest foods you can cookup for a better healthier diet.
 ![image](https://user-images.githubusercontent.com/97799318/188192571-dc0ed7b4-41bc-446a-b1aa-60d492b054c4.png)
 ![pageScreenshots](https://user-images.githubusercontent.com/97799318/194932920-fb92a0e5-c827-4b05-b8b7-1f654c962d85.png)
 
