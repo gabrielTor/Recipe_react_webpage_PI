@@ -36,7 +36,7 @@ async function getRecipes(req, res){
 const { name } = req.query
     try{
         const recipeDB = await Recipe.findAll()
-        await axios.get('http://localhost:3001/diets')
+        // await axios.get('http://localhost:3001/diets')
         if(recipeDB.length === 0) {
             const spoonApi = await axios.get(recipeUrl)
             const response = await spoonApi.data
