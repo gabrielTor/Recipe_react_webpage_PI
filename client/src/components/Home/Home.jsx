@@ -34,10 +34,8 @@ function Home() {
 
   useEffect(() => {
     setIsLoading(true)
-    setTimeout(()=>{
-      dispatch(getRecipes())
-      setIsLoading(false)
-    }, 1000)
+    dispatch(getRecipes())
+    setIsLoading(false)
 
     return () => {
       dispatch(clearDetails())
@@ -76,9 +74,9 @@ function Home() {
             <div key={r.id} className='rCards'>
               <Link to={`/home/${r.id}`}>
                 <Recipe 
-                  name={r.name} 
-                  image={r.image} 
-                  diets={r.diets} 
+                  name={r.name}
+                  image={r.image}
+                  diets={r.dietTypes}
                   key={r.id}/>
               </Link>
             </div>
