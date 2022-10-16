@@ -15,6 +15,7 @@ function Search() {
   const handleSubmit = (event) => {
     event.preventDefault()
     dispatch(getRecipesByName(recName))
+    setRecName('')
   }
 
   return (
@@ -22,6 +23,7 @@ function Search() {
       <input
         type="text"
         placeholder="Look for Recipe"
+        value={recName}
         onChange={(e) => handleOnSearch(e)}
       />
       <button type="submit" onClick={(e) => handleSubmit(e)}>Search</button>
