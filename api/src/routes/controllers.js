@@ -68,10 +68,11 @@ const { name } = req.query
         }
 
         if(name){
-        const recipeName = recipeDB.filter(r => r.name.toLowerCase().includes(name.toLowerCase()) )
+        const allRecipes = await Recipe.findAll({include: DietTypes})
+        const recipeName = allRecipes.filter(r => r.name.toLowerCase().includes(name.toLowerCase()) )
         if(recipeName.length > 0) return res.send(recipeName)
         else res.status(404).send('No recipe found with that name')
-        } 
+        }
         else {
             const allRecipes = await Recipe.findAll({include: DietTypes})
             res.send(allRecipes)

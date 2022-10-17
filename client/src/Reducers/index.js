@@ -52,7 +52,8 @@ export const rootReducer = (state = initialState, action) => {
             })
             return {
                 ...state,
-                recipes: dietsfilter
+                recipes: dietsfilter,
+                recipesByName: dietsfilter
             }
         case ALPHABETICALLY:
             const orderBy = (value) => {

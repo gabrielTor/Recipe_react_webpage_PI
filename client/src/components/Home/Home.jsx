@@ -17,7 +17,6 @@ function Home() {
   const dispatch = useDispatch()
   const allRecipes = useSelector(state => state.recipes)
   const recipeFound = useSelector(state => state.recipesByName)
-  const [isLoading, setIsLoading] = useState(false);
   const indexLast = page * recipesPerPage
   const indexFirst = indexLast - recipesPerPage
   let currentRecipes = recipeFound.length ? recipeFound.slice(indexFirst, indexLast) : allRecipes.slice(indexFirst, indexLast)
@@ -33,9 +32,7 @@ function Home() {
   }
 
   useEffect(() => {
-    setIsLoading(true)
     dispatch(getRecipes())
-    setIsLoading(false)
 
     return () => {
       dispatch(clearDetails())
@@ -66,7 +63,7 @@ function Home() {
         handleHealthOrder={handleHealthOrder} 
         handleDiet={handleDiet}/>
 
-      {isLoading ? <Loading/> :
+      {!allRecipes.length ? <Loading/> :
       <div className="grid">
       {
         currentRecipes?.map(r => {
