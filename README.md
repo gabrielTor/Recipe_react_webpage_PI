@@ -5,11 +5,9 @@ In this app you can also search any recipe by its name, filter by type, order th
 ![image](https://user-images.githubusercontent.com/97799318/188192571-dc0ed7b4-41bc-446a-b1aa-60d492b054c4.png)
 ![pageScreenshots](https://user-images.githubusercontent.com/97799318/194932920-fb92a0e5-c827-4b05-b8b7-1f654c962d85.png)
 
-webpage with data from API:
-https://spoonacular-api-project.herokuapp.com/home
 <br>
+You can visit this page here:
 <br>
-webpage with database:
 https://recipe-react-webpage-pi.vercel.app/
 
 Tech Stack:

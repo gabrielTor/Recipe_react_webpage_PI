@@ -1,7 +1,7 @@
 #landing{
     background-image: url(./background.png);
     background-size: cover;
-    height: 38rem;
+    height: 45rem;
     width: 100%;
 }
 #landing h1{
