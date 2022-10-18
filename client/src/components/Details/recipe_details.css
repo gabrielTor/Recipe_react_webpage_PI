@@ -6,11 +6,10 @@
     margin-top: 5rem;
 }
 .details ol{
-    list-style-type: none;
     margin: 0;
     padding: 0;
 }
-li{
+ul li{
     list-style-type: none;
 }
 .container{
@@ -38,4 +37,15 @@ li{
     height: 3.5rem;
     cursor: pointer;
     color: white;
+}
+.edit-btn{
+    background-color: aqua;
+    border-radius: 0.3rem;
+    border: none;
+    width: 5rem;
+    height: 2rem;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 2rem;
+    font-size: large;
 }

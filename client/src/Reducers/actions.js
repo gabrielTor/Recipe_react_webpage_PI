@@ -11,7 +11,6 @@ export const ORDER_HEALTH_SCORE = "ORDER_HEALTH_SCORE"
 export const CLEARDETAILS = "CLEARDETAILS"
 export const DELETERECIPE = "DELETERECIPE"
 export const EDIT_RECIPE = "EDIT_RECIPE"
-export const SHOW = "SHOW"
 
 export const getRecipes = () => {
     return async (dispatch) => {
@@ -86,12 +85,5 @@ export const editRe = (id, value) => {
     return async (dispatch) => {
         await axios.put(`/recipes/edit/${id}`, value)
         return dispatch({type: EDIT_RECIPE})
-    }
-}
-
-export const showOrHide = (value) => {
-    return {
-        type: SHOW,
-        payload: value
     }
 }

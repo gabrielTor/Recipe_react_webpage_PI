@@ -2,7 +2,7 @@ import React from "react";
 import './editRecipe.css'
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { editRe, getDietTypes, showOrHide } from '../../Reducers/actions'
+import { editRe, getDietTypes, getRecipeDetail } from '../../Reducers/actions'
 import { useHistory } from "react-router-dom";
 
 const validate = (input) => {
@@ -25,7 +25,7 @@ function EditRecipe(props) {
 
   const history = useHistory()
   const diets = useSelector(state => state.diets)
-  const details = useSelector(state => state.recipeDetail)
+  const details = useSelector(state => state.editDetail)
   const dispatch = useDispatch()
   const [errors, setErrors] = useState({})
   const [input, setinput] = useState({
@@ -40,11 +40,11 @@ function EditRecipe(props) {
 
   useEffect(() => {
     dispatch(getDietTypes())
+    dispatch(getRecipeDetail(props.match.params.id))
   }, [])
 
   const handleSubmit = () => {
     dispatch(editRe(props.match.params.id, input))
-    dispatch(showOrHide(false))
     history.push('/home')
   }
   const handleChange = (event) => {
@@ -66,13 +66,12 @@ function EditRecipe(props) {
     }
   }
   const handleCancel = () => {
-    dispatch(showOrHide(false))
     history.push(`/home/${props.match.params.id}`)
   }
 
   return (
     <div className="edit">
-    <button onClick={()=>{handleCancel()}}>Cancel</button>
+    <button className="edit-btn" onClick={()=>{handleCancel()}}>Cancel</button>
     <form id='form' onSubmit={(e)=>handleSubmit(e)}>
       <div className="form">
         <label>Enter a title for your recipe:</label>
