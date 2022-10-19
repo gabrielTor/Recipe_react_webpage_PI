@@ -6,6 +6,7 @@ import { getRecipeDetail, clearDetails, deleteRecipe } from '../../Reducers/acti
 import Navbar from "../NavBar/Navbar";
 import { useHistory, Link } from 'react-router-dom'
 import Loading from '../Loading/Loading'
+import food_default from '../Home/food_default.png'
 
 function Recipe_Details(props) {
 
@@ -38,7 +39,7 @@ function Recipe_Details(props) {
       </Link>
       <h4>Summary:</h4>
       <h3 dangerouslySetInnerHTML={{__html: details.summary,}}/>
-      <img className="detailImg" src={details.image} alt="recipe"/>
+      <img className="detailImg" src={details.image || food_default} alt="recipe"/>
       
       <div className="step-container">
       {

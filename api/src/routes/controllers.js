@@ -106,7 +106,7 @@ async function createRecipe(req, res){
             summary,
             steps,
             healthScore,
-            image: image ? image : '',
+            image,
             dishTypes
         })
 

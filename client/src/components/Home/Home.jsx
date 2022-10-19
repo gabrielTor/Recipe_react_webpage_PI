@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import Pagination from "../Pagination/Pagination";
 import Filter from "../Filter/Filter";
 import Loading from '../Loading/Loading'
+import food_default from './food_default.png'
 
 function Home() {
   const [updatePage, setUpdatePage] = useState('')
@@ -72,7 +73,7 @@ function Home() {
               <Link to={`/home/${r.id}`}>
                 <Recipe 
                   name={r.name}
-                  image={r.image}
+                  image={r.image || food_default}
                   diets={r.dietTypes}
                   key={r.id}/>
               </Link>
