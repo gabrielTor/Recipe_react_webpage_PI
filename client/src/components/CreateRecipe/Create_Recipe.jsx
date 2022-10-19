@@ -90,7 +90,7 @@ function Create_Recipe() {
       
       <div className="form">
         <label>image url:</label>
-        <input type="url" name="image" value={input.image} onChange={(e)=>handleChange(e)}/>
+        <input type="url" name="image" value={input.image} placeholder='Default Image' onChange={(e)=>handleChange(e)}/>
       </div>
 
       <div className="form">
