@@ -106,7 +106,7 @@ async function createRecipe(req, res){
             summary,
             steps,
             healthScore,
-            image: image ? image : 'https://w7.pngwing.com/pngs/156/887/png-transparent-local-food-ottawa-computer-icons-restaurant-others-miscellaneous-food-company.png',
+            image: image ? image : '',
             dishTypes
         })
 
