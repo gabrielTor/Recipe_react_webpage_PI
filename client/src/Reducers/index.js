@@ -11,7 +11,7 @@ import {
     DELETERECIPE,
     EDIT_RECIPE,
 } from "./actions";
-
+/* eslint-disable */
 let initialState = {
     recipesByName: [],
     recipes: [],
