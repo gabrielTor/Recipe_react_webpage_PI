@@ -40,7 +40,7 @@ function Create_Recipe() {
 
   useEffect(() => {
     dispatch(getDietTypes())
-  }, [])
+  }, [dispatch])
 
   const handleSubmit = () => {
     dispatch(createRecipe(input))

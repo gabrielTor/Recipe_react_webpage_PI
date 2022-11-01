@@ -11,6 +11,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 export default function Register(){
 
     const dispatch = useDispatch()
+    const [error, setError] = useState(true)
     const [input, setInput] = useState({
         firstName: '',
         lastName: '',
@@ -18,8 +19,15 @@ export default function Register(){
         password: ''
     })
 
+    useEffect(()=>{
+        if(input.password){
+            if(PWD_REGEX.test(input.password)) setError(false)
+            else setError(true)
+        }
+    }, [input.password])
+
     const handleSubmit = () => {
-        dispatch(userRegister(input))
+        if(!error) dispatch(userRegister(input))
     }
     const handleChange = (event) => {
         setInput((currentInput) => ({
@@ -31,29 +39,31 @@ export default function Register(){
     return (
         <section>
             <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <>
-                <label>First Name</label>
-                <input type='text' name='firstName' value={input.firstName} onChange={(e)=>handleChange(e)} required/>
-                </>
+            <div id='reg-container'>
+                <form id='register-form' onSubmit={handleSubmit}>
+                    <>
+                    <label>First Name</label>
+                    <input type='text' name='firstName' value={input.firstName} onChange={(e)=>handleChange(e)} required/>
+                    </>
 
-                <>
-                <label>Last Name</label>
-                <input type='text' name='lastName' value={input.lastName} onChange={(e)=>handleChange(e)} required/>
-                </>
+                    <>
+                    <label>Last Name</label>
+                    <input type='text' name='lastName' value={input.lastName} onChange={(e)=>handleChange(e)} required/>
+                    </>
 
-                <>
-                <label>Email</label>
-                <input type='text' name='email' value={input.email} onChange={(e)=>handleChange(e)} required/>
-                </>
+                    <>
+                    <label>Email</label>
+                    <input type='text' autoComplete="off" name='email' value={input.email} onChange={(e)=>handleChange(e)} required/>
+                    </>
 
-                <>
-                <label>Password</label>
-                <input type='password' name='password' value={input.password} onChange={(e)=>handleChange(e)} required/>
-                </>
-                <br></br>
-                <button type="submit">Sign up</button>
-            </form>
+                    <>
+                    <label>Password</label>
+                    <input type='password' name='password' value={input.password} onChange={(e)=>handleChange(e)} required/>
+                    </>
+                    <br></br>
+                    <button type="submit">Sign up</button>
+                </form>
+            </div>
         </section>
     )
 }

@@ -1,0 +1,8 @@
+#reg-container{
+    display:flex;
+    justify-content: center;
+}
+
+#register-form{
+    width: min-content;
+}
