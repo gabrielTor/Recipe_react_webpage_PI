@@ -18,7 +18,7 @@ function Recipe_Details(props) {
     dispatch(getRecipeDetail(props.match.params.id))
 
     return ()=> dispatch(clearDetails())
-  }, [])
+  }, [dispatch, props.match.params.id])
 
   const handleDelete = () => {
     dispatch(deleteRecipe(props.match.params.id))
