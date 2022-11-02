@@ -26,7 +26,7 @@ export default function Login(){
     const handleSubmit = (event) => {
         event.preventDefault()
         dispatch(userLogin(input))
-        setTimeout(()=>{history.push('/home')}, 500)
+        // setTimeout(()=>{history.push('/home')}, 500)
     }
 
     return (
