@@ -10,15 +10,19 @@ import {
     CLEARDETAILS,
     DELETERECIPE,
     EDIT_RECIPE,
+    LOGIN,
+    LOGOUT,
+    REFRESH
 } from "./actions";
-
+/* eslint-disable */
 let initialState = {
     recipesByName: [],
     recipes: [],
     recipeDetail: {},
     diets: [],
     recipesAll: [],
-    editDetail: {}
+    editDetail: {},
+    user: {}
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -108,7 +112,22 @@ export const rootReducer = (state = initialState, action) => {
             }
         case EDIT_RECIPE:
             return {
+                ...state
+            }
+        case LOGIN:
+            return {
                 ...state,
+                user: action.payload
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                user: {}
+            }
+        case REFRESH:
+            return {
+                ...state,
+                user: action.payload
             }
         default: return state
     }

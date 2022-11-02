@@ -41,7 +41,7 @@ function EditRecipe(props) {
   useEffect(() => {
     dispatch(getDietTypes())
     dispatch(getRecipeDetail(props.match.params.id))
-  }, [])
+  }, [dispatch, props.match.params.id])
 
   const handleSubmit = () => {
     dispatch(editRe(props.match.params.id, input))

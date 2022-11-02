@@ -22,7 +22,7 @@ const validate = (input) => {
   return errors
 }
 
-function Create_Recipe() {
+function CreateRecipe() {
 
   const history = useHistory()
   const diets = useSelector(state => state.diets)
@@ -40,7 +40,7 @@ function Create_Recipe() {
 
   useEffect(() => {
     dispatch(getDietTypes())
-  }, [])
+  }, [dispatch])
 
   const handleSubmit = () => {
     dispatch(createRecipe(input))
@@ -126,4 +126,4 @@ function Create_Recipe() {
   )
 }
   
-export default Create_Recipe;
+export default CreateRecipe;

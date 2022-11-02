@@ -1,0 +1,55 @@
+#reg-container{
+    display:flex;
+    justify-content: center;
+}
+
+#register-form{
+    width: min-content;
+    border-style: inset;
+    border-color: rgb(139, 129, 213);
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.register-btn{
+    background-color: aqua;
+    border-radius: 0.3rem;
+    border: none;
+    width: 5rem;
+    height: 2rem;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: large;
+}
+
+.items{
+    margin: 1rem;
+}
+
+.box{
+    background-color: rgba(0, 128, 0, 0.589);
+}
+.goBack{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: #06aa1f;
+    border-style: none;
+    width: 9rem;
+    height: 3rem;
+    border-radius: 0.4rem;
+
+}

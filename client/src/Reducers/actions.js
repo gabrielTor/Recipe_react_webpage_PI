@@ -11,6 +11,10 @@ export const ORDER_HEALTH_SCORE = "ORDER_HEALTH_SCORE"
 export const CLEARDETAILS = "CLEARDETAILS"
 export const DELETERECIPE = "DELETERECIPE"
 export const EDIT_RECIPE = "EDIT_RECIPE"
+export const REGISTER = "REGISTER"
+export const LOGIN = "LOGIN"
+export const LOGOUT = "LOGOUT"
+export const REFRESH = "REFRESH"
 
 export const getRecipes = () => {
     return async (dispatch) => {
@@ -85,5 +89,33 @@ export const editRe = (id, value) => {
     return async (dispatch) => {
         await axios.put(`/recipes/edit/${id}`, value)
         return dispatch({type: EDIT_RECIPE})
+    }
+}
+
+export const userRegister = (value) => {
+    return async (dispatch) => {
+        await axios.post('/user', value)
+        return dispatch({type: REGISTER})
+    }
+}
+
+export const userLogin = (value) => {
+    return async (dispatch) => {
+        const response = await axios.post('/user/login', value)
+        return dispatch({type: LOGIN, payload: response.data})
+    }
+}
+
+export const userLogout = () => {
+    return async (dispatch) => {
+        await axios.get('/user/logout')
+        return dispatch({type: LOGOUT})
+    }
+}
+
+export const refreshToken = () => {
+    return async (dispatch) => {
+        const response = await axios.get('/user/refresh', {withCredentials: true})
+        return dispatch({type: REFRESH, payload: response.data})
     }
 }

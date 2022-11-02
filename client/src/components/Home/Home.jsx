@@ -10,7 +10,7 @@ import Pagination from "../Pagination/Pagination";
 import Filter from "../Filter/Filter";
 import Loading from '../Loading/Loading'
 import food_default from './food_default.png'
-
+/* eslint-disable */
 function Home() {
   const [updatePage, setUpdatePage] = useState('')
   const [page, setPage] = useState(1)

@@ -20,9 +20,7 @@ let dietsArr = [
 async function getDiets(req, res){
     try {
         dietsArr.map((d) => {
-        DietTypes.findOrCreate({ 
-            where: { name: d } 
-        });
+        DietTypes.findOrCreate({ where: { name: d } })
         })
         let diet_types = await DietTypes.findAll()
         res.send(diet_types)
