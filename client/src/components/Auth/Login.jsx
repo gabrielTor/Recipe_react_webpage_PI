@@ -14,7 +14,7 @@ export default function Login(){
         password: ''
     })
     useEffect(()=>{
-        // dispatch(userLogout())
+        dispatch(userLogout())
     }, [dispatch])
 
     const handleChange = (event) => {
@@ -26,7 +26,7 @@ export default function Login(){
     const handleSubmit = (event) => {
         event.preventDefault()
         dispatch(userLogin(input))
-        // history.push('/home')
+        history.push('/home')
     }
 
     return (
