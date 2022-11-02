@@ -1,6 +1,7 @@
 const allowedOrigins = [
     'https://foodapp2022.herokuapp.com',
     'https://recipe-react-webpage-pi.vercel.app',
+    'http://127.0.0.1:5500/',
     'http://localhost:3001',
     'http://localhost:3000',
   ]
