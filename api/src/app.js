@@ -8,11 +8,11 @@ require('./db.js');
 
 const server = express();
 const cors = require('cors');
-const { credentials, corsOptions } = require('./config/corsOptions.js');
+const { corsOptions } = require('./config/corsOptions.js');
 
 server.name = 'API';
 
-server.use(credentials)
+// server.use(credentials)
 server.use(cors(corsOptions))
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
