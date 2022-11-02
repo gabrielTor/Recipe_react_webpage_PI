@@ -120,6 +120,7 @@ export const rootReducer = (state = initialState, action) => {
                 user: action.payload
             }
         case LOGOUT:
+            if(state.user.user) alert('You Have Been Logged Out!')
             return {
                 ...state,
                 user: {}

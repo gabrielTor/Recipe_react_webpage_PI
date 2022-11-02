@@ -22,14 +22,9 @@ function Navbar() {
         <li className="navList">
           <Link to='/createRecipe'><a>Create Recipe</a></Link>
         </li>
-        { user.user ?
         <li className="navList">
-          <Link to='/login'><a>Logout</a></Link>
-        </li> :
-        <li className="navList">
-          <Link to='/login'><a>Login</a></Link>
+          <Link to='/login'><a>{user.user ? 'Logout' : 'Login'}</a></Link>
         </li>
-        }
         <li className="navSearch">
           <Search/>
         </li>
