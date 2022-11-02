@@ -13,7 +13,10 @@ const { credentials, corsOptions } = require('./config/corsOptions.js');
 server.name = 'API';
 
 server.use(credentials)
-server.use(cors(corsOptions))
+server.use(cors({
+  origin: 'https://recipe-react-webpage-pi.vercel.app',
+  credentials: true
+}))
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
