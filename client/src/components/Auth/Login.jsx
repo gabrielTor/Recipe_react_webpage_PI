@@ -1,13 +1,22 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { userLogin, userLogout } from "../../Reducers/actions";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 export default function Login(){
 
+    const history = useHistory()
+    const dispatch = useDispatch()
     const [input, setInput] = useState({
         email: '',
         password: ''
     })
+    useEffect(()=>{
+        dispatch(userLogout())
+    }, [dispatch])
+
     const handleChange = (event) => {
         setInput((currentInput) => ({
           ...currentInput,
@@ -15,11 +24,13 @@ export default function Login(){
         }))
     }
     const handleSubmit = () => {
-
+        dispatch(userLogin(input))
+        history.push('/home')
     }
 
     return (
         <section>
+            <button className="goBack" onClick={()=>history.push('/home')}>	◄ Go Back Home</button>
             <h1>Login</h1>
             <div id='reg-container'>
                 <form id='register-form' onSubmit={handleSubmit}>
@@ -34,7 +45,7 @@ export default function Login(){
                     <input type='password' name='password' value={input.password} onChange={(e)=>handleChange(e)} required/>
                     </div>
 
-                    <button className='register-btn' type="submit">Sign up</button>
+                    <button className='register-btn' type="submit">Sign in</button>
 
                     <p>
                         Not registered yet?<br />

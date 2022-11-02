@@ -8,10 +8,11 @@ import { useHistory, Link } from 'react-router-dom'
 import Loading from '../Loading/Loading'
 import food_default from '../Home/food_default.png'
 
-function Recipe_Details(props) {
+function RecipeDetails(props) {
 
   const dispatch = useDispatch()
   const details = useSelector(state => state.recipeDetail)
+  const user = useSelector(state => state.user)
   const history = useHistory()
   
   useEffect(()=>{
@@ -19,6 +20,13 @@ function Recipe_Details(props) {
 
     return ()=> dispatch(clearDetails())
   }, [dispatch, props.match.params.id])
+
+  useEffect(()=>{
+    if(!user.user) {
+      history.push('/login')
+      setTimeout(()=>{alert('To access you must login first!')},300)
+    }
+  }, [history, user.user])
 
   const handleDelete = () => {
     dispatch(deleteRecipe(props.match.params.id))
@@ -64,4 +72,4 @@ function Recipe_Details(props) {
   )
 }
   
-export default Recipe_Details;
+export default RecipeDetails;

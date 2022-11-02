@@ -43,3 +43,13 @@
 .box{
     background-color: rgba(0, 128, 0, 0.589);
 }
+.goBack{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: #06aa1f;
+    border-style: none;
+    width: 9rem;
+    height: 3rem;
+    border-radius: 0.4rem;
+
+}

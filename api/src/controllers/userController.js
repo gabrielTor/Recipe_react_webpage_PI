@@ -47,8 +47,8 @@ async function login(req, res){
             )
             user.refreshToken = refreshToken
             await user.save()
-            res.cookie('jwt', refreshToken, { httpOnly: true, /*secure: true,*/ sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
-            res.send(accessToken)
+            res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+            res.send({token: accessToken, user: user})
         } 
         else res.status(401).send('incorrect credentials')
     } catch (error) {
@@ -77,7 +77,7 @@ async function handleRefresh(req, res){
                 process.env.ACCESS_TOKEN,
                 { expiresIn: '10m' }
             );
-            res.send(accessToken)
+            res.send({token: accessToken, user: user})
         }
     );
 

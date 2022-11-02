@@ -5,9 +5,9 @@ const verifyJWT = require('../verifyJWT');
 
 router.get('/', getRecipes)
 
-router.get('/:recipeId', verifyJWT, getDetails)
+router.get('/:recipeId', /*verifyJWT,*/ getDetails)
 
-router.post('/', createRecipe)
+router.post('/', /*verifyJWT,*/ createRecipe)
 
 router.put('/edit/:id', editRecipe)
 
