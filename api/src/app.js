@@ -12,7 +12,7 @@ const { credentials, corsOptions } = require('./config/corsOptions.js');
 
 server.name = 'API';
 
-server.use(credentials)
+// server.use(credentials)
 server.use(cors({
   origin: 'https://recipe-react-webpage-pi.vercel.app',
   credentials: true
