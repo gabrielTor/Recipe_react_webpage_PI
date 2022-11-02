@@ -30,7 +30,7 @@ export default function Login(){
 
     return (
         <section>
-            <button className="goBack" onClick={()=>history.push('/home')}>	◄ Go Back Home</button>
+            <button className="goBack" type='button' onClick={()=>history.push('/home')}>	◄ Go Back Home</button>
             <h1>Login</h1>
             <div id='reg-container'>
                 <form id='register-form' onSubmit={handleSubmit}>
