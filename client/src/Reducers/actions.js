@@ -101,7 +101,7 @@ export const userRegister = (value) => {
 
 export const userLogin = (value) => {
     return async (dispatch) => {
-        const response = await axios.post('/user/login', value, { headers: { 'Content-Type': 'application/json' }, withCredentials: true})
+        const response = await axios.post('/user/login', value)
         return dispatch({type: LOGIN, payload: response.data})
     }
 }
