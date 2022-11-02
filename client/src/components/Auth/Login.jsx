@@ -23,14 +23,15 @@ export default function Login(){
           [event.target.name]: event.target.value
         }))
     }
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault()
         dispatch(userLogin(input))
         history.push('/home')
     }
 
     return (
         <section>
-            <button className="goBack" type='button' onClick={()=>history.push('/home')}>	◄ Go Back Home</button>
+            <button className="goBack" onClick={()=>history.push('/home')}>	◄ Go Back Home</button>
             <h1>Login</h1>
             <div id='reg-container'>
                 <form id='register-form' onSubmit={handleSubmit}>
