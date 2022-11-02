@@ -94,15 +94,23 @@ export const editRe = (id, value) => {
 
 export const userRegister = (value) => {
     return async (dispatch) => {
-        await axios.post('/user', value)
-        return dispatch({type: REGISTER})
+        try {
+            await axios.post('/user', value)
+            return dispatch({type: REGISTER})
+        } catch (error) {
+            alert(error.response.data)
+        }
     }
 }
 
 export const userLogin = (value) => {
     return async (dispatch) => {
-        const response = await axios.post('/user/login', value)
-        return dispatch({type: LOGIN, payload: response.data})
+        try {
+            const response = await axios.post('/user/login', value)
+            return dispatch({type: LOGIN, payload: response.data})
+        } catch (error) {
+            alert(error.response.data)
+        }
     }
 }
 
