@@ -16,18 +16,27 @@ function Navbar() {
   return (
     <nav>
       <ul className="nav">
+
         <li className="navList">
           <Link to='/home'><a onClick={()=>handleReload()}>HOME</a></Link>
         </li>
+
         <li className="navList">
           <Link to='/createRecipe'><a>Create Recipe</a></Link>
         </li>
+
         <li className="navList">
           <Link to='/login'><a>{user.user ? 'Logout' : 'Login'}</a></Link>
         </li>
+        { user.user && window.location.href === 'https://recipe-react-webpage-pi.vercel.app/home' ?
+        <li className="navList">
+          <Link to='/home'><a>{user.user.toUpperCase()}</a></Link>
+        </li> : null
+        }
         <li className="navSearch">
           <Search/>
         </li>
+
       </ul>
     </nav>
   );
