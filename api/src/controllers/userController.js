@@ -49,7 +49,7 @@ async function login(req, res){
             // await user.save()
             // res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
             // res.send({token: accessToken, user: user})
-            res.send(user)
+            res.send({user: `Welcome ${user.firstName} ${user.lastName}`})
         } 
         else res.status(401).send('incorrect credentials')
     } catch (error) {
