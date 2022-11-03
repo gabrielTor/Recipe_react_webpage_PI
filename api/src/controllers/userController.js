@@ -31,24 +31,25 @@ async function login(req, res){
         if(!user) return res.status(401).send('You must register')
         const credentials = await bcrypt.compare(password, user.password)
         if(credentials){
-            const accessToken = jwt.sign(
-                {
-                    "UserInfo": {
-                        "userEmail": user.email
-                    }
-                },
-                process.env.ACCESS_TOKEN,
-                { expiresIn: '10m' }
-            )
-            const refreshToken = jwt.sign(
-                {"userEmail": user.email},
-                process.env.REFRESH_TOKEN,
-                {expiresIn: '1d'}
-            )
-            user.refreshToken = refreshToken
-            await user.save()
-            res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
-            res.send({token: accessToken, user: user})
+            // const accessToken = jwt.sign(
+            //     {
+            //         "UserInfo": {
+            //             "userEmail": user.email
+            //         }
+            //     },
+            //     process.env.ACCESS_TOKEN,
+            //     { expiresIn: '10m' }
+            // )
+            // const refreshToken = jwt.sign(
+            //     {"userEmail": user.email},
+            //     process.env.REFRESH_TOKEN,
+            //     {expiresIn: '1d'}
+            // )
+            // user.refreshToken = refreshToken
+            // await user.save()
+            // res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+            // res.send({token: accessToken, user: user})
+            res.send(user)
         } 
         else res.status(401).send('incorrect credentials')
     } catch (error) {
