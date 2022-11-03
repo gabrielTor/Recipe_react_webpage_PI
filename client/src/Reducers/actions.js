@@ -25,8 +25,12 @@ export const getRecipes = () => {
 
 export const getRecipesByName = (name) => {
     return async (dispatch) => {
-        const response = await axios.get(`/recipes?name=${name}`)
-        return dispatch({ type: GET_RECIPES_BY_NAME, payload: response.data })
+        try {
+            const response = await axios.get(`/recipes?name=${name}`)
+            return dispatch({ type: GET_RECIPES_BY_NAME, payload: response.data })
+        } catch (error) {
+            alert(error.response.data)
+        }
     }
 }
 
