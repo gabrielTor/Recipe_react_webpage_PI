@@ -1,7 +1,9 @@
 const {User} = require('../db')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const nodemailer = require('nodemailer')
 require('dotenv').config();
+
 
 async function register(req, res){
     const {firstName, lastName, email, password} = req.body
@@ -17,6 +19,20 @@ async function register(req, res){
             email,
             password: hashedPW
         })
+        const mailTransporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth:{
+                user: process.env.EMAIL,
+                pass: process.env.PASS
+            }
+        })
+        let message = {
+            from: process.env.EMAIL,
+            to: email,
+            subject: 'Welcome to the Food webApp',
+            text: 'You have successfully registered to the Food webApp and can know login to view delicious recipes and/or create some of your own!'
+        }
+        await mailTransporter.sendMail(message)
         res.send(newUser)
     } catch (error) {
         console.log(error)
@@ -31,25 +47,24 @@ async function login(req, res){
         if(!user) return res.status(401).send('You must register')
         const credentials = await bcrypt.compare(password, user.password)
         if(credentials){
-            // const accessToken = jwt.sign(
-            //     {
-            //         "UserInfo": {
-            //             "userEmail": user.email
-            //         }
-            //     },
-            //     process.env.ACCESS_TOKEN,
-            //     { expiresIn: '10m' }
-            // )
-            // const refreshToken = jwt.sign(
-            //     {"userEmail": user.email},
-            //     process.env.REFRESH_TOKEN,
-            //     {expiresIn: '1d'}
-            // )
-            // user.refreshToken = refreshToken
-            // await user.save()
-            // res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
-            // res.send({token: accessToken, user: user})
-            res.send({user: `Welcome ${user.firstName} ${user.lastName}`})
+            const accessToken = jwt.sign(
+                {
+                    "UserInfo": {
+                        "userEmail": user.email
+                    }
+                },
+                process.env.ACCESS_TOKEN,
+                { expiresIn: '10m' }
+            )
+            const refreshToken = jwt.sign(
+                {"userEmail": user.email},
+                process.env.REFRESH_TOKEN,
+                {expiresIn: '1d'}
+            )
+            user.refreshToken = refreshToken
+            await user.save()
+            res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+            res.send({token: accessToken, user: `Welcome ${user.firstName} ${user.lastName}`})
         } 
         else res.status(401).send('incorrect credentials')
     } catch (error) {
