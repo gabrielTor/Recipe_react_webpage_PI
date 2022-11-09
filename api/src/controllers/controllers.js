@@ -4,29 +4,33 @@ require('dotenv').config();
 const { API_key } = process.env;
 const recipeUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_key}&addRecipeInformation=true&number=100`;
 
-let dietsArr = [
-    "gluten free",
-    "dairy free",          
-    "ketogenic",           
-    "lacto ovo vegetarian",
-    "vegan",               
-    "pescatarian",         
-    "paleolithic",         
-    "primal",              
-    "fodmap friendly",     
-    "whole 30"
-  ]
-
-async function getDiets(req, res){
-    try {
-        dietsArr.map((d) => {
-        DietTypes.findOrCreate({ where: { name: d } })
-        })
-        let diet_types = await DietTypes.findAll()
-        res.send(diet_types)
-    } 
-    catch (err) {
-    console.log(err)
+async function fillDataBase(){
+    const spoonApi = await axios.get(recipeUrl)
+    const response = await spoonApi.data
+    const hundredRecipes = response.results.map(r => {
+        return {
+            name: r.title,
+            summary: r.summary,
+            steps: r.analyzedInstructions.length ? 
+                r.analyzedInstructions[0].steps.map(s => s.step).join('-|- ') : 
+                "There are no instructions.",
+            healthScore: r.healthScore,
+            image: r.image,
+            dishTypes: r.dishTypes.join(', '),
+            diets: r.diets
+        }
+    })
+    await Recipe.bulkCreate(hundredRecipes)
+    for (let i = 0; i < hundredRecipes.length; i++) {
+        let recipe = await Recipe.findOne({where:{name: hundredRecipes[i].name}})
+        if(hundredRecipes[i].diets.length > 0){
+            for (let j = 0; j < hundredRecipes[i].diets.length; j++) {
+                let dietDb = await DietTypes.findAll({
+                    where:{ name: hundredRecipes[i].diets[j]}
+                })
+                recipe.addDietTypes(dietDb)
+            }
+        }
     }
 }
 
@@ -36,35 +40,8 @@ const { name } = req.query
         const recipeDB = await Recipe.findAll()
         // await axios.get('http://localhost:3001/diets')
         if(recipeDB.length === 0) {
-            const spoonApi = await axios.get(recipeUrl)
-            const response = await spoonApi.data
-            const hundredRecipes = response.results.map(r => {
-                return {
-                    name: r.title,
-                    summary: r.summary,
-                    steps: r.analyzedInstructions.length ? 
-                        r.analyzedInstructions[0].steps.map(s => s.step).join('-|- ') : 
-                        "There are no instructions.",
-                    healthScore: r.healthScore,
-                    image: r.image,
-                    dishTypes: r.dishTypes.join(', '),
-                    diets: r.diets
-                }
-            })
-            await Recipe.bulkCreate(hundredRecipes)
-            for (let i = 0; i < hundredRecipes.length; i++) {
-                let recipe = await Recipe.findOne({where:{name: hundredRecipes[i].name}})
-                if(hundredRecipes[i].diets.length > 0){
-                    for (let j = 0; j < hundredRecipes[i].diets.length; j++) {
-                        let dietDb = await DietTypes.findAll({
-                            where:{ name: hundredRecipes[i].diets[j]}
-                        })
-                        recipe.addDietTypes(dietDb)
-                    }
-                }
-            }
+            await fillDataBase()
         }
-
         if(name){
         const allRecipes = await Recipe.findAll({include: DietTypes})
         const recipeName = allRecipes.filter(r => r.name.toLowerCase().includes(name.toLowerCase()) )
@@ -153,4 +130,4 @@ async function deleteRecipe(req, res){
     }
 }
 
-module.exports = {getDiets, getRecipes, getDetails, createRecipe, editRecipe, deleteRecipe};
+module.exports = {getRecipes, getDetails, createRecipe, editRecipe, deleteRecipe};
