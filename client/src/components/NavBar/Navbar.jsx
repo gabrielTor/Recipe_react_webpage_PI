@@ -2,14 +2,16 @@ import React from "react";
 import './navbar.css'
 import { Link } from 'react-router-dom'
 import Search from '../Search/Search'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { getRecipes } from '../../Reducers/actions'
 /* eslint-disable */
 function Navbar() {
 
+  const dispatch = useDispatch()
   const user = useSelector(state => state.user)
   const handleReload = () => {
     if(window.location.href === 'https://recipe-react-webpage-pi.vercel.app/home'){
-      window.location.reload()
+      dispatch(getRecipes())
     }
   }
 

@@ -19,6 +19,11 @@ const validate = (input) => {
   if(input.healthScore > 100 || input.healthScore < 0){
     errors.healthScore = 'Score can not exceed 100, nor be negative number'
   }
+  if(input.image){
+    if(!/^https?:\/\/.+\.(jpg|jpeg|png|gif)$/.test(input.image)) {
+      errors.image = 'Valid images that end with jpg, jpeg, png, gif'
+    }
+  }
   return errors
 }
 
@@ -42,8 +47,10 @@ function CreateRecipe() {
     dispatch(getDietTypes())
   }, [dispatch])
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
     dispatch(createRecipe(input))
+    alert('Created new Recipe')
     history.push('/home')
   }
   const handleChange = (event) => {
@@ -117,10 +124,11 @@ function CreateRecipe() {
         }
       </div>
       
-      <button disabled={errors.name || errors.summary || errors.healthScore} type="submit">Enter</button>
       { errors.name && (<p className="danger">{errors.name}</p>) }
       { errors.summary && (<p className="danger">{errors.summary}</p>) }
       { errors.healthScore && (<p className="danger">{errors.healthScore}</p>) }
+      { errors.image && (<p className="danger">{errors.image}</p>) }
+      <button disabled={errors.name || errors.summary || errors.healthScore || errors.image} type="submit">Enter</button>
     </form>
     </>
   )

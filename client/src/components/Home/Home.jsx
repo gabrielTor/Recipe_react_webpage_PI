@@ -40,6 +40,10 @@ function Home() {
       dispatch(getRecipes()) 
     }
   }, [dispatch])
+  
+  useEffect(()=>{
+    setPage(1)
+  },[recipeFound])
 
   const handleOrder = (event) => {
     dispatch(orderAlphabetically(event.target.value))
