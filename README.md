@@ -16,6 +16,7 @@ Tech Stack:
 <li>Sequelize</li>
 <li>NodeJS</li>
 <li>ReactJS</li>
+<li>Redux</li>
 <li>CSS</li>
 </ul>
 **Environment Variables**
