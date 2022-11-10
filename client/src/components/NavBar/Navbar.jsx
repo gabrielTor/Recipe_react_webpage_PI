@@ -2,25 +2,18 @@ import React from "react";
 import './navbar.css'
 import { Link } from 'react-router-dom'
 import Search from '../Search/Search'
-import { useSelector, useDispatch } from 'react-redux'
-import { getRecipes } from '../../Reducers/actions'
+import { useSelector } from 'react-redux'
 /* eslint-disable */
 function Navbar() {
 
-  const dispatch = useDispatch()
   const user = useSelector(state => state.user)
-  const handleReload = () => {
-    if(window.location.href === 'https://recipe-react-webpage-pi.vercel.app/home'){
-      dispatch(getRecipes())
-    }
-  }
 
   return (
     <nav>
       <ul className="nav">
 
         <li className="navList">
-          <Link to='/home'><a onClick={()=>handleReload()}>HOME</a></Link>
+          <Link to='/home'><a>HOME</a></Link>
         </li>
 
         <li className="navList">

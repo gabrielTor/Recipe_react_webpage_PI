@@ -12,7 +12,7 @@ import Loading from '../Loading/Loading'
 import food_default from './food_default.png'
 /* eslint-disable */
 function Home() {
-  const [updatePage, setUpdatePage] = useState('')
+  const [updatePage, setUpdatePage] = useState(false)
   const [page, setPage] = useState(1)
   const recipesPerPage = 9
   const dispatch = useDispatch()
@@ -26,10 +26,10 @@ function Home() {
   const totalRecipes = recipeFound.length ? recipeFound.length : allRecipes.length
   const numLength = Math.ceil(totalRecipes / recipesPerPage)
   const handleNext = () => {
-    if(numLength !== page) setPage(page + 1)
+    if(numLength !== page) setPage((p) => p + 1)
   }
   const handlePrev = () => {
-    if(page !== 1) setPage(page - 1)
+    if(page !== 1) setPage((p) => p - 1)
   }
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function Home() {
   const handleOrder = (event) => {
     dispatch(orderAlphabetically(event.target.value))
     setPage(1)
-    setUpdatePage(event.target.value)
+    setUpdatePage((s)=>!s)
   }
   const handleDiet = (event) => {
     dispatch(filterByDiet(event.target.value))
@@ -57,7 +57,7 @@ function Home() {
   const handleHealthOrder = (event) => {
     dispatch(orderHealthScore(event.target.value))
     setPage(1)
-    setUpdatePage(event.target.order)
+    setUpdatePage((s)=>!s)
   }
 
   return (
