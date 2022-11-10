@@ -33,7 +33,6 @@ function Home() {
   }
 
   useEffect(() => {
-    dispatch(getRecipes())
 
     return () => {
       dispatch(clearDetails())
