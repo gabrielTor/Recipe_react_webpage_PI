@@ -1,6 +1,5 @@
 #form{
-    position: static;
-    width: 90%;
+    width: 100%;
     margin: auto;
     margin-top: 6rem;
     display: flex;
@@ -16,42 +15,43 @@
     margin: auto;
     margin-top: 2rem;
     font-size: large;
+    margin-bottom: 3%;
 }
 .diets{
-    display: block;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin: 2%;
 }
 .danger{
     color: red;
 }
 .form{
-   margin: 5px;
+   margin: 1%;
    font-weight: bold;
    display: flex;
    justify-content: space-between;
-   padding: 0 30%;
 }
 .form input{
-    float: right;
+    width: 100%;
+    height: 100%;
 }
 .form textarea{
     float: right;
-    width: 10.6rem;
+    width: 100%;
+    resize: vertical;
 }
 #dtypes{
-    border-style: inset;
-    border-color: rgb(139, 129, 213);
     max-width: fit-content;
     margin: auto;
+    margin-top: 3%;
     font-weight: bold;
 }
-#dtypes input{
-    float: right;
-}
 label{
-    margin-right: 2rem;
+    width: 100%;
 }
-@media (width < 700px) {
-    .form{
-        padding: 0 0%;
+@media (width < 612px) {
+    #form{
+        margin-top: 10rem;
     }
 }

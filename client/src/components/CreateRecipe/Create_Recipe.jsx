@@ -97,7 +97,7 @@ function CreateRecipe() {
       
       <div className="form">
         <label>image url:</label>
-        <input type="url" name="image" value={input.image} placeholder='Default Image' onChange={(e)=>handleChange(e)}/>
+        <input type="url" name="image" value={input.image} placeholder='If no image available a Default Image will be added' onChange={(e)=>handleChange(e)}/>
       </div>
 
       <div className="form">

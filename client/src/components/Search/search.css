@@ -1,8 +1,6 @@
 .search{
     float: right;
     padding: 0.687rem 0.875rem;
-    border-style: inset;
-    border-color: rgb(139, 129, 213);
     margin-top: 0.5rem;
 }
 .search button{
