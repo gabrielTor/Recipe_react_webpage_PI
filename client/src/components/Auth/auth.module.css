@@ -74,3 +74,9 @@
     position: absolute;
     max-width: 40%;
 }
+
+.loggedIn{
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: small;
+}

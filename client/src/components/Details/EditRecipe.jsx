@@ -1,3 +1,4 @@
+import styles from '../CreateRecipe/create_recipe.module.css'
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import { editRe, getDietTypes, getRecipeDetail } from '../../redux/actions'
@@ -68,58 +69,62 @@ function EditRecipe(props) {
   }
 
   return (
-    <div className="edit">
-    <button className="edit-btn" onClick={()=>{handleCancel()}}>Cancel</button>
-    <form id='form' onSubmit={(e)=>handleSubmit(e)}>
-      <div className="form">
-        <label>Enter a title for your recipe:</label>
-        <input className={errors.name && 'danger'} type="text" name="name" value={input.name} onChange={(e)=>handleChange(e)} required/>
-      </div>
-      
-      <div className="form">
-        <label>Summary of recipe:</label>
-        <input className={errors.summary && 'danger'} type="textarea" name="summary" value={input.summary} onChange={(e)=>handleChange(e)} required/>
-      </div>
-      
-      <div className="form">
-        <label>What health score does it have:</label>
-        <input className={errors.healthScore && 'danger'} type="number" name="healthScore" value={input.healthScore} onChange={(e)=>handleChange(e)}/>
-      </div>
-      
-      <div className="form">
-        <label>image url:</label>
-        <input type="url" name="image" value={input.image} onChange={(e)=>handleChange(e)}/>
-      </div>
+    <div className={styles.edit}>
+      <form className={styles.formContainer} onSubmit={(e)=>handleSubmit(e)}>
+      <button onClick={handleCancel}>Cancel</button>
+        <div className={styles.form}>
+          <label>Enter a title for your recipe:</label>
+          <input className={errors.name && styles.danger} type="text" name="name" value={input.name} onChange={(e)=>handleChange(e)} required/>
+        </div>
+        
+        <div className={styles.form}>
+          <label>Summary of recipe:</label>
+          <input className={errors.summary && styles.danger} type="textarea" name="summary" value={input.summary} onChange={(e)=>handleChange(e)} required/>
+        </div>
+        
+        <div className={styles.form}>
+          <label>What health score does it have:</label>
+          <input className={errors.healthScore && styles.danger} type="number" name="healthScore" value={input.healthScore} onChange={(e)=>handleChange(e)}/>
+        </div>
+        
+        <div className={styles.form}>
+          <label>image url:</label>
+          <input type="url" name="image" value={input.image} onChange={(e)=>handleChange(e)}/>
+        </div>
 
-      <div className="form">
-        <label>dish types:</label>
-        <input type="text" name="dishTypes" value={input.dishTypes} onChange={(e)=>handleChange(e)}/>
-      </div>
+        <div className={styles.form}>
+          <label>dish types:</label>
+          <input type="text" name="dishTypes" value={input.dishTypes} onChange={(e)=>handleChange(e)}/>
+        </div>
 
-      <div className="form">
-        <label>step by step instructions:</label>
-        <textarea name="steps" value={input.steps} onChange={(e)=>handleChange(e)}/>
-      </div>
-      
-      <div id='dtypes'>
+        <div className={styles.form}>
+          <label>step by step instructions:</label>
+          <textarea name="steps" value={input.steps} onChange={(e)=>handleChange(e)}/>
+        </div>
+        
         <label>Diet type:</label>
-        {
-          diets.map(d => {
-            return (
-              <label className="diets" key={d.id}>
-              {d.name}
-              <input type="checkbox" value={d.name} onChange={(e)=>handleDiet(e)}/>
+        <div className={styles.dTypes}>
+          {
+            diets.map(d => (
+              <label className={styles.diets} key={d.id}>
+                {d.name}
+                <input type="checkbox" value={d.name} onChange={(e)=>handleDiet(e)}/>
               </label>
-            )
-          })
-        }
-      </div>
-      
-      <button disabled={errors.name || errors.summary || errors.healthScore} type="submit">Enter</button>
-      { errors.name && (<p className="danger">{errors.name}</p>) }
-      { errors.summary && (<p className="danger">{errors.summary}</p>) }
-      { errors.healthScore && (<p className="danger">{errors.healthScore}</p>) }
-    </form>
+            ))
+          }
+        </div>
+
+        <div className={styles.submit}>
+          { errors.name && (<p className={styles.danger}>{errors.name}</p>) }
+          { errors.summary && (<p className={styles.danger}>{errors.summary}</p>) }
+          { errors.healthScore && (<p className={styles.danger}>{errors.healthScore}</p>) }
+        </div>
+        
+        <div className={styles.submit}>
+          <button disabled={errors.name || errors.summary || errors.healthScore} type="submit">Enter</button>
+        </div>
+        
+      </form>
     </div>
   )
 }

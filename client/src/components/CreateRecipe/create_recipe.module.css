@@ -32,7 +32,6 @@
     height: 100%;
 }
 .form textarea{
-    float: right;
     width: 100%;
     resize: vertical;
 }

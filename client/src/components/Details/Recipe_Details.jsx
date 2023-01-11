@@ -43,7 +43,7 @@ function RecipeDetails(props) {
       <h1>{details.name}</h1>
 
       <Link to={`/home/edit/${details.id}`}>
-        <button disabled className={styles.editBtn}>
+        <button className={styles.editBtn}>
           Edit
         </button>
       </Link>

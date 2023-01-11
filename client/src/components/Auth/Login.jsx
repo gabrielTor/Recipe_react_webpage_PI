@@ -50,6 +50,13 @@ export default function Login(){
                         <button className={styles.registerBtn} type="submit">Sign in</button>
                     </div>
 
+                    <div className={styles.items}>
+                        <span className={styles.loggedIn}>
+                            <label>Keep me logged in</label>
+                            <input type="checkbox" />
+                        </span>
+                    </div>
+
                     <p>
                         Not registered yet?<br />
                         <Link to="/register">Go Register</Link>
