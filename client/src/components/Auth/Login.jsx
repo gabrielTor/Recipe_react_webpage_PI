@@ -30,29 +30,29 @@ export default function Login(){
     }
 
     return (
-        <section>
-            <button className="goBack" onClick={()=>history.push('/home')}>	◄ Go Back Home</button>
+        <section className={styles.auth}>
+            <button className={styles.goBack} onClick={()=>history.push('/home')}>&#10094; Go Back Home</button>
             <h1>Login</h1>
-            <div id='reg-container'>
-                <form id='register-form' onSubmit={handleSubmit}>
+            <div className={styles.regContainer}>
+                <form className={styles.registerForm} onSubmit={handleSubmit}>
 
-                    <div className="items">
-                    <label>Email</label>
-                    <input type='text' autoComplete="off" name='email' value={input.email} onChange={(e)=>handleChange(e)} required/>
+                    <div className={styles.items}>
+                        <label>Email</label>
+                        <input type='text' autoComplete="off" name='email' value={input.email} onChange={(e)=>handleChange(e)} required/>
                     </div>
 
-                    <div className="items">
-                    <label>Password</label>
-                    <input type='password' name='password' value={input.password} onChange={(e)=>handleChange(e)} required/>
+                    <div className={styles.items}>
+                        <label>Password</label>
+                        <input type='password' name='password' value={input.password} onChange={(e)=>handleChange(e)} required/>
                     </div>
 
-                    <button className='register-btn' type="submit">Sign in</button>
+                    <div className={styles.items}>
+                        <button className={styles.registerBtn} type="submit">Sign in</button>
+                    </div>
 
                     <p>
                         Not registered yet?<br />
-                        <span className="line">
-                            <Link to="/register">Go Register</Link>
-                        </span>
+                        <Link to="/register">Go Register</Link>
                     </p>
 
                 </form>
