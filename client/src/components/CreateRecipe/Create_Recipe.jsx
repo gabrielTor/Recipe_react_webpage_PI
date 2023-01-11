@@ -1,8 +1,7 @@
-import React from "react";
-import './create_recipe.css'
+import styles from './create_recipe.module.css'
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { createRecipe, getDietTypes } from '../../Reducers/actions'
+import { createRecipe, getDietTypes } from '../../redux/actions'
 import Navbar from '../NavBar/Navbar'
 import { useHistory } from "react-router-dom";
 
@@ -76,46 +75,46 @@ function CreateRecipe() {
     <>
     <Navbar/>
 
-    <form id='form' onSubmit={(e)=>handleSubmit(e)}>
-      <div className="form">
+    <form className={styles.formContainer} onSubmit={(e)=>handleSubmit(e)}>
+      <div className={styles.form}>
         <label>Enter a title for your recipe:</label>
         <input className={errors.name && 'danger'} type="text" name="name" value={input.name} onChange={(e)=>handleChange(e)} required/>
-        {/* { errors.name && (<p className="danger">{errors.name}</p>) } */}
+        {/* { errors.name && (<p className={styles.danger}>{errors.name}</p>) } */}
       </div>
       
-      <div className="form">
+      <div className={styles.form}>
         <label>Summary of recipe:</label>
         <input className={errors.summary && 'danger'} type="textarea" name="summary" value={input.summary} onChange={(e)=>handleChange(e)} required/>
-        {/* { errors.summary && (<p className="danger">{errors.summary}</p>) } */}
+        {/* { errors.summary && (<p className={styles.danger}>{errors.summary}</p>) } */}
       </div>
       
-      <div className="form">
+      <div className={styles.form}>
         <label>What health score does it have:</label>
         <input className={errors.healthScore && 'danger'} type="number" name="healthScore" value={input.healthScore} onChange={(e)=>handleChange(e)}/>
-        {/* { errors.healthScore && (<p className="danger">{errors.healthScore}</p>) } */}
+        {/* { errors.healthScore && (<p className={styles.danger}>{errors.healthScore}</p>) } */}
       </div>
       
-      <div className="form">
+      <div className={styles.form}>
         <label>image url:</label>
         <input type="url" name="image" value={input.image} placeholder='If no image available a Default Image will be added' onChange={(e)=>handleChange(e)}/>
       </div>
 
-      <div className="form">
+      <div className={styles.form}>
         <label>dish types:</label>
         <input type="text" name="dishTypes" value={input.dishTypes} onChange={(e)=>handleChange(e)}/>
       </div>
 
-      <div className="form">
+      <div className={styles.form}>
         <label>step by step instructions:</label>
         <textarea name="steps" value={input.steps} onChange={(e)=>handleChange(e)}/>
       </div>
       
-      <div id='dtypes'>
-        <label>Diet type:</label>
+      <label>Diet type:</label>
+      <div className={styles.dTypes}>
         {
           diets.map(d => {
             return (
-              <label className="diets" key={d.id}>
+              <label className={styles.diets} key={d.id}>
               {d.name}
               <input type="checkbox" value={d.name} onChange={(e)=>handleDiet(e)}/>
               </label>
@@ -123,12 +122,17 @@ function CreateRecipe() {
           })
         }
       </div>
+      <div className={styles.submit}>
+        { errors.name && (<p className={styles.danger}>{errors.name}</p>) }
+        { errors.summary && (<p className={styles.danger}>{errors.summary}</p>) }
+        { errors.healthScore && (<p className={styles.danger}>{errors.healthScore}</p>) }
+        { errors.image && (<p className={styles.danger}>{errors.image}</p>) }
+      </div>
+
+      <div className={styles.submit}>
+        <button disabled={errors.name || errors.summary || errors.healthScore || errors.image} type="submit">Enter</button>
+      </div>
       
-      { errors.name && (<p className="danger">{errors.name}</p>) }
-      { errors.summary && (<p className="danger">{errors.summary}</p>) }
-      { errors.healthScore && (<p className="danger">{errors.healthScore}</p>) }
-      { errors.image && (<p className="danger">{errors.image}</p>) }
-      <button disabled={errors.name || errors.summary || errors.healthScore || errors.image} type="submit">Enter</button>
     </form>
     </>
   )

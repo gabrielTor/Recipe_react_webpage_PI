@@ -1,7 +1,7 @@
-import React from "react";
+import styles from './auth.module.css'
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { userLogin, userLogout } from "../../Reducers/actions";
+import { userLogin, userLogout } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 

@@ -1,23 +1,22 @@
-import React from "react";
-import './filter.css'
+import styles from './filter.module.css'
 
 function Filter({handleOrder, handleHealthOrder, handleDiet}){
 
     return(
-        <div className="filter">
-            <select onChange={(e)=>handleOrder(e)}>
+        <div className={styles.filter}>
+            <select disabled onChange={(e)=>handleOrder(e)}>
                 <option value='none'>Order by:</option>
                 <option value='A-Z'>A-Z</option>
                 <option value='Z-A'>Z-A</option>
             </select>
 
-            <select onChange={(e)=>handleHealthOrder(e)}>
+            <select disabled onChange={(e)=>handleHealthOrder(e)}>
                 <option value='none'>Health Score Order</option>
                 <option value='highest'>highest health score</option>
                 <option value='lowest'>lowest health score</option>
             </select>
 
-            <select onChange={(e)=>handleDiet(e)}>
+            <select disabled onChange={(e)=>handleDiet(e)}>
                 <option value='none'>Filter by diet:</option>
                 <option value='gluten free'>gluten free</option>
                 <option value='dairy free'>dairy free</option>

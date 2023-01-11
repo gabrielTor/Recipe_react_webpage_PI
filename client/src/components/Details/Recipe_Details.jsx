@@ -1,8 +1,8 @@
 import React from "react";
-import './recipe_details.css'
+import styles from './recipe_details.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getRecipeDetail, clearDetails, deleteRecipe } from '../../Reducers/actions'
+import { getRecipeDetail, clearDetails, deleteRecipe } from '../../redux/actions'
 import Navbar from "../NavBar/Navbar";
 import { useHistory, Link } from 'react-router-dom'
 import Loading from '../Loading/Loading'
@@ -34,41 +34,44 @@ function RecipeDetails(props) {
   }
 
   return (
-    <div className="details">
-      <Navbar/>
+    <>
+    <Navbar/>
+    <div className={styles.detailsContainer}>
 
       {!details.name ? <Loading/> : 
       <>
       <h1>{details.name}</h1>
+
       <Link to={`/home/edit/${details.id}`}>
-        <button className="edit-btn">
+        <button disabled className={styles.editBtn}>
           Edit
         </button>
       </Link>
-      <h4>Summary:</h4>
-      <h3 dangerouslySetInnerHTML={{__html: details.summary,}}/>
-      <img className="detailImg" src={details.image || food_default} alt="recipe"/>
+
+      <h3>Summary:</h3>
+      <h4 dangerouslySetInnerHTML={{__html: details.summary,}}/>
+
+      <div className={styles.subContainer}>
+        <img className={styles.detailImg} src={details.image || food_default} alt="recipe"/>
+        <div className={styles.info}>
+          <h4>Health Score: {details.healthScore}</h4>
+          <h4>Dish types: {details.dishTypes}</h4>
+          <h4>Diet Type: </h4><ul>{details.diets?.map((d,i) => (<li key={i}>- {d}</li>))}</ul>
+        </div>
+      </div>
       
-      <div className="step-container">
-      {
-        <h2>
-          Steps: <ol>{details.steps.split('-|-').map((s,i)=>(
-            <li key={i}>{i+1+')'+s}</li>
-          ))}</ol>
-        </h2>
-      }
+      <div className={styles.stepContainer}>
+      <h3>Steps: </h3>
+        {<ol>{details.steps.split('-|-').map((step,i)=>(
+            <li key={i}>{step}</li>
+          ))}</ol>}
       </div>
-
-      <div className="container">
-        <h3>Health Score: {details.healthScore}</h3>
-        <h3>Dish types: {details.dishTypes}</h3>
-        <h3>Diet Type: <ul>{details.diets?.map((d,i) => (<li key={i}>- {d}</li>))}</ul></h3>
+      <div className={styles.deleteContainer}>
+        <button className={styles.delete} disabled={true} onClick={()=>handleDelete()}>Delete Recipe</button>
       </div>
-
-      <button id='delete' disabled={false} onClick={()=>handleDelete()}>Delete Recipe</button>
       </>
       }
-    </div>
+    </div></>
   )
 }
   

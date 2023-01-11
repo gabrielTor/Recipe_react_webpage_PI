@@ -1,11 +1,9 @@
-import React from "react";
-import './home.css'
+import styles from './home.module.css'
 import Navbar from "../NavBar/Navbar";
 import { useDispatch, useSelector } from 'react-redux'
 import Recipe from '../Recipe/Recpie'
-import { getRecipes, orderAlphabetically, filterByDiet, orderHealthScore, clearDetails } from '../../Reducers/actions'
+import { getRecipes, orderAlphabetically, filterByDiet, orderHealthScore, clearDetails } from '../../redux/actions'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import Pagination from "../Pagination/Pagination";
 import Filter from "../Filter/Filter";
 import Loading from '../Loading/Loading'
@@ -21,7 +19,6 @@ function Home() {
   const indexLast = page * recipesPerPage
   const indexFirst = indexLast - recipesPerPage
   let currentRecipes = recipeFound.length ? recipeFound.slice(indexFirst, indexLast) : allRecipes.slice(indexFirst, indexLast)
-  const handlePage = (num) => setPage(num)
   
   const totalRecipes = recipeFound.length ? recipeFound.length : allRecipes.length
   const numLength = Math.ceil(totalRecipes / recipesPerPage)
@@ -60,35 +57,31 @@ function Home() {
   }
 
   return (
-    <div id="home">
+    <div className={styles.home}>
       <Navbar/>
-      <Filter 
+      {/* <Filter 
         handleOrder={handleOrder} 
         handleHealthOrder={handleHealthOrder} 
-        handleDiet={handleDiet}/>
+        handleDiet={handleDiet}/> */}
 
       {!allRecipes.length ? <Loading/> :
-      <div className="grid">
-      {
-        currentRecipes?.map(r => {
-          return(
-            <div key={r.id} className='rCards'>
-              <Link to={`/home/${r.id}`}>
-                <Recipe 
-                  name={r.name}
-                  image={r.image || food_default}
-                  diets={r.dietTypes}
-                  key={r.id}/>
-              </Link>
-            </div>
-          )
-        })
-      }
+      <div className={styles.grid}>
+        {
+          currentRecipes?.map(r => (
+            <Recipe
+              key={r.id}
+              id={r.id}
+              name={r.name}
+              image={r.image || food_default}
+              diets={r.dietTypes} />
+          ))
+        }
       </div>
       }
       <Pagination 
         numLength={numLength} 
-        page={handlePage}
+        setPage={setPage}
+        page={page}
         nextP={handleNext}
         prevP={handlePrev}/>
     </div>

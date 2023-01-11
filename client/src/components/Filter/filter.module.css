@@ -1,0 +1,6 @@
+.filter select{
+    border: none;
+    border-radius: 3px;
+    margin: 0 2px;
+    outline: none;
+}

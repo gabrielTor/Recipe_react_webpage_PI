@@ -4,11 +4,11 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './Store/index'
+import store from './redux/store'
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios'
 import dotenv from 'dotenv'
-import { getRecipes } from './Reducers/actions';
+import { getRecipes } from './redux/actions';
 dotenv.config()
 
 axios.defaults.baseURL = process.env.REACT_APP_GABR || "http://localhost:3001";

@@ -1,10 +1,9 @@
-import React from "react";
-import "./loading.css";
+import styles from './loading.module.css'
 
 function Loading() {
   return (
-    <div className="spinner-container">
-      <div className="loading-spinner"></div>
+    <div className={styles.spinnerContainer}>
+      <div className={styles.loadingSpinner}></div>
     </div>
   );
 }

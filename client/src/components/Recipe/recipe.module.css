@@ -1,4 +1,8 @@
-#recipeImg{
+a{
+    text-decoration: none;
+    color: black;
+}
+.recipeImg{
     width: 80%;
     height: 60%;
     margin: auto;
@@ -10,16 +14,12 @@
     flex-direction: column;
     justify-content: space-around;
     margin: 0.625rem;
-    border-style: inset;
-    border-color: rgb(139, 129, 213);
     background-color: rgba(229, 208, 114, 0.698);
     border-radius: 0.5rem;
+    text-align: center;
+    box-shadow: 1px 1px 5px;
 }
 .card p{
-    border-style: inset;
-    border-color: rgba(139, 129, 213, 0.224);
-    border-width: 1rem;
-    position: relative;
     margin-bottom: 0;
     height: 12%;
 }

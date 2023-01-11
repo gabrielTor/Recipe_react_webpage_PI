@@ -1,9 +1,8 @@
-import React from "react";
-import "./register.css"
+import styles from './auth.module.css'
 import { useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { userRegister } from "../../Reducers/actions";
+import { userRegister } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from 'react-router-dom'
 

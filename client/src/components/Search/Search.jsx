@@ -1,6 +1,5 @@
-import React from "react";
-import './search.css'
-import { getRecipesByName } from '../../Reducers/actions'
+import styles from './search.module.css'
+import { getRecipesByName } from '../../redux/actions'
 import { useState } from "react"
 import { useDispatch } from 'react-redux'
 
@@ -19,7 +18,7 @@ function Search() {
   }
 
   return (
-    <form className="search">
+    <form className={styles.search}>
       <input
         type="text"
         placeholder="Look for Recipe"

@@ -1,21 +1,16 @@
-#form{
-    width: 100%;
-    margin: auto;
-    margin-top: 6rem;
-    display: flex;
-    flex-direction: column;
+.formContainer{
+    padding: 3%;
+    font-weight: bold;
 }
-#form button{
-    background-color: aqua;
+.formContainer button{
+    background-color: orange;
     border-radius: 0.3rem;
     border: none;
     width: 5rem;
     height: 2rem;
     cursor: pointer;
-    margin: auto;
-    margin-top: 2rem;
+    margin: 2rem;
     font-size: large;
-    margin-bottom: 3%;
 }
 .diets{
     display: flex;
@@ -41,17 +36,22 @@
     width: 100%;
     resize: vertical;
 }
-#dtypes{
-    max-width: fit-content;
-    margin: auto;
-    margin-top: 3%;
-    font-weight: bold;
+.dTypes{
+    padding: 0 3%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    margin-top: 2%;
 }
 label{
     width: 100%;
 }
-@media (width < 612px) {
-    #form{
-        margin-top: 10rem;
+.submit{
+    width: fit-content;
+    margin: auto;
+}
+@media (width < 650px) {
+    .dTypes{
+        grid-template-columns: repeat(2, 1fr);
     }
 }

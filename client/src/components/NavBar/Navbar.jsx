@@ -1,7 +1,7 @@
-import React from "react";
-import './navbar.css'
+import styles from './navbar.module.css'
 import { Link } from 'react-router-dom'
 import Search from '../Search/Search'
+import Filter from '../Filter/Filter'
 import { useSelector } from 'react-redux'
 /* eslint-disable */
 function Navbar() {
@@ -9,32 +9,17 @@ function Navbar() {
   const user = useSelector(state => state.user)
 
   return (
-    <nav>
-      <ul className="nav">
-
-        <li className="navList">
-          <Link to='/home'><a>HOME</a></Link>
-        </li>
-
-        <li className="navList">
-          <Link to='/createRecipe'><a>Create Recipe</a></Link>
-        </li>
-
-        <li className="navList">
-          <Link to='/login'><a>{user.user ? 'Logout' : 'Login'}</a></Link>
-        </li>
-        { user.user && window.location.href === 'https://recipe-react-webpage-pi.vercel.app/home' ?
-        <li className="navList">
-          <Link to='/home'><a>{user.user.toUpperCase()}</a></Link>
-        </li> : null
-        }
-        <li className="navSearch">
-          <Search/>
-        </li>
-
-      </ul>
+    <nav className={styles.nav}>
+      <Link to='/home'>HOME</Link>
+      <Link to='/createRecipe'>Create Recipe</Link>
+      <Link to='/login'>{user.user ? 'Logout' : 'Login'}</Link>
+      {user.user && window.location.href === 'https://recipe-react-webpage-pi.vercel.app/home' ?
+      <Link to='/home'>{user.user.toUpperCase()}</Link>
+      : null}
+      <Filter/>  
+      <Search/>
     </nav>
   );
 }
   
-  export default Navbar;
+export default Navbar;

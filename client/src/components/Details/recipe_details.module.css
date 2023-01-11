@@ -1,9 +1,19 @@
+.detailsContainer{
+    padding: 0 3%;
+}
+.detailsContainer h1{
+    text-align: center;
+}
+.subContainer{
+    display: flex;
+    justify-content: space-evenly;
+}
+.info{
+    padding: 0 5%;
+}
 .detailImg{
     max-width: 65%;
     max-height: 50%;
-}
-.details{
-    margin-top: 5rem;
 }
 .details ol{
     margin: 0;
@@ -12,34 +22,28 @@
 ul li{
     list-style-type: none;
 }
-.container{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-.container h3{
-    margin: auto;
-}
-.step-container li{
+.stepContainer li{
     padding: 2%;
 }
-#delete{
+.deleteContainer{
+    width: fit-content;
+    margin: 3% auto;
+}
+.delete{
     background-color: rgba(249, 0, 0, 0.822);
     border: none;
     border-radius: 1rem;
     width: 7rem;
     height: 3rem;
-    margin: 2rem;
-    margin-top: 6rem;
 }
-#delete:hover{
+.delete:hover{
     width: 8rem;
     height: 3.5rem;
     cursor: pointer;
     color: white;
 }
-.edit-btn{
-    background-color: aqua;
+.editBtn{
+    background-color: orange;
     border-radius: 0.3rem;
     border: none;
     width: 5rem;
@@ -48,4 +52,12 @@ ul li{
     margin: auto;
     margin-top: 2rem;
     font-size: large;
+}
+
+@media (width < 500px) {
+    .subContainer{
+        display: flex;
+        flex-direction: column;
+        padding: 0 10%;
+    }
 }

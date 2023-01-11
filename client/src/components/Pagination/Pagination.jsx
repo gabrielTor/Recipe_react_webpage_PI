@@ -1,24 +1,23 @@
-import React from "react";
-import './pagination.css'
+import styles from './pagination.module.css'
 
-function Pagination({ page, nextP, prevP, numLength }){
+function Pagination({ page, setPage, nextP, prevP, numLength }){
     const pageN = []
     for (let i = 1; i <= numLength; i++) {
         pageN.push(i)
     }
 
     return(
-        <ul className="pNums">
-            <li><button onClick={()=>prevP()}>Previous</button></li>
+        <ul className={styles.pNums}>
+            <li><button onClick={()=>prevP()}>&#10094;</button></li>
             {
-                pageN?.map(n => { 
+                pageN?.map(n => {
                 return (
-                    <li className='btn' key={n}>
-                        <button onClick={()=>page(n)}>{n}</button>
+                    <li className={styles.btn} key={n}>
+                        <button className={page === n ? styles.onPage : null} onClick={()=>setPage(n)}>{n}</button>
                     </li>)
                 })
             }
-            <li><button onClick={()=>nextP()}>Next</button></li>
+            <li><button onClick={()=>nextP()}>&#10095;</button></li>
         </ul>
     )
 }

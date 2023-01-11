@@ -1,8 +1,6 @@
-import React from "react";
-import './editRecipe.css'
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { editRe, getDietTypes, getRecipeDetail } from '../../Reducers/actions'
+import { editRe, getDietTypes, getRecipeDetail } from '../../redux/actions'
 import { useHistory } from "react-router-dom";
 
 const validate = (input) => {

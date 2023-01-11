@@ -1,15 +1,16 @@
-#landing{
+.landing{
     background-image: url(./background.png);
     background-size: cover;
     height: 100vh;
     width: 100%;
 }
-#landing h1{
-    padding-top: 6%;
-}
+
 .main{
-    margin-top: 0;
+    width: fit-content;
+    margin: auto;
+    padding: 5%;
 }
+
 .mainbtn{
     background-color: rgba(249, 204, 4, 0.557);
     border: none;
@@ -18,7 +19,7 @@
     border-radius: 3rem;
     font-weight: bold;
     font-size: x-large;
-    margin-top: 6rem;
+    margin: auto;
 }
 .mainbtn:hover{
     background-color: orange;
@@ -29,7 +30,7 @@
 }
 @media (width < 400px) {
     @media (height < 700px ) {
-        #landing{
+        .landing{
             background-image: url(./background.png);
             background-size: cover;
             height: 50rem;
@@ -37,7 +38,7 @@
         }
     }
     @media (height < 900px ) {
-        #landing{
+        .landing{
             background-image: url(./background.png);
             background-size: cover;
             height: 55rem;
@@ -47,7 +48,7 @@
 }
 @media (width < 500px) {
     @media (height < 700px ) {
-        #landing{
+        .landing{
             background-image: url(./background.png);
             background-size: cover;
             height: 50rem;
@@ -55,7 +56,7 @@
         }
     }
     @media (height < 920px ) {
-        #landing{
+        .landing{
             background-image: url(./background.png);
             background-size: cover;
             height: 57rem;
@@ -65,7 +66,7 @@
 }
 @media (width < 800px) {
     @media (height < 1030px ) {
-        #landing{
+        .landing{
             background-image: url(./background.png);
             background-size: cover;
             height: 64rem;
