@@ -15,6 +15,8 @@ import {
     REFRESH
 } from "./actions";
 /* eslint-disable */
+const loggedIn = JSON.parse(localStorage.getItem('user'))
+
 let initialState = {
     recipesByName: [],
     recipes: [],
@@ -22,7 +24,7 @@ let initialState = {
     diets: [],
     recipesAll: [],
     editDetail: {},
-    user: {}
+    user: loggedIn || {}
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -115,12 +117,16 @@ export const rootReducer = (state = initialState, action) => {
                 ...state
             }
         case LOGIN:
+            if(JSON.parse(localStorage.getItem('persist'))){
+                localStorage.setItem('user', JSON.stringify(action.payload))
+            }
             return {
                 ...state,
                 user: action.payload
             }
         case LOGOUT:
             if(state.user.user) alert('You Have Been Logged Out!')
+            localStorage.removeItem('user')
             return {
                 ...state,
                 user: {}

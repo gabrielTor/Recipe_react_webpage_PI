@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { userLogin, userLogout } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import useLocalStorage from "./useLocalStorage"
 
 export default function Login(){
 
     const history = useHistory()
     const dispatch = useDispatch()
+    const [value, setValue] = useLocalStorage('persist')
     const [input, setInput] = useState({
         email: '',
         password: ''
@@ -27,6 +29,11 @@ export default function Login(){
         event.preventDefault()
         dispatch(userLogin(input))
         history.push('/home')
+    }
+    const handleLoggedIn = (event) => {
+        if(event.target.checked){
+            setValue(true)
+        } else setValue(false)
     }
 
     return (
@@ -53,7 +60,7 @@ export default function Login(){
                     <div className={styles.items}>
                         <span className={styles.loggedIn}>
                             <label>Keep me logged in</label>
-                            <input type="checkbox" />
+                            <input type="checkbox" value={value} checked={value} onChange={handleLoggedIn}/>
                         </span>
                     </div>
 
