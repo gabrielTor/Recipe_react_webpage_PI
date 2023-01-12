@@ -1,13 +1,13 @@
 .pNums{
     display: flex;
     position: sticky;
-    bottom: 6px;
+    bottom: 5px;
     width: fit-content;
     margin: auto;
 }
 .pNums button{
     background-color: orange;
-    margin: 0 3px;
+    margin: 3rem 3px 0;
     border: none;
     border-radius: 5px;
     padding: 0.8em;
@@ -17,4 +17,14 @@
 }
 .btn .onPage{
     background-color: rgb(255, 73, 1);
+}
+
+@media (width < 750px) {
+    .pNums button{
+        background-color: orange;
+        margin: 20rem 3px 0;
+        border: none;
+        border-radius: 5px;
+        padding: 0.8em;
+    }
 }
