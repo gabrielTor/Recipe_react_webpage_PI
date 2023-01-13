@@ -14,18 +14,12 @@ function Home() {
   const dispatch = useDispatch()
   const allRecipes = useSelector(state => state.recipes)
   const recipeFound = useSelector(state => state.recipesByName)
-  const indexLast = page * 9
+  const indexLast = page.num * 9
   const indexFirst = indexLast - 9
   let currentRecipes = recipeFound.length ? recipeFound.slice(indexFirst, indexLast) : allRecipes.slice(indexFirst, indexLast)
   
   const totalRecipes = recipeFound.length ? recipeFound.length : allRecipes.length
   const numLength = Math.ceil(totalRecipes / 9)
-  const handleNext = () => {
-    if(numLength !== page) dispatch({type: 'changePage', payload: page+1})
-  }
-  const handlePrev = () => {
-    if(page !== 1) dispatch({type: 'changePage', payload: page-1})
-  }
 
   useEffect(() => {
 
@@ -58,9 +52,7 @@ function Home() {
       </div>
       }
       <Pagination 
-        numLength={numLength} 
-        nextP={handleNext}
-        prevP={handlePrev}/>
+        numLength={numLength} />
     </div>
   )
 }
