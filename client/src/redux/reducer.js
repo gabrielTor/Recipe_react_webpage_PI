@@ -24,7 +24,8 @@ let initialState = {
     diets: [],
     recipesAll: [],
     editDetail: {},
-    user: loggedIn || {}
+    user: loggedIn || {},
+    currentPage: 1
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -135,6 +136,11 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.payload
+            }
+        case 'changePage':
+            return {
+                ...state,
+                currentPage: action.payload
             }
         default: return state
     }
