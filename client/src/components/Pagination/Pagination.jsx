@@ -31,20 +31,20 @@ function Pagination({ numLength }){
     })
 
     return(
-        <ul className={styles.pNums}>
-            <li><button onClick={handlePrev}>&#10094;</button></li>
+        <div className={styles.pNums}>
+            <button onClick={handlePrev}>&#10094;</button>
             {windowSize < 560 ? null : 
                 pageN?.map(n => (
-                    <li className={styles.btn} key={n}>
+                    <span className={styles.btn} key={n}>
                         <button 
                             className={page === n ? styles.onPage : null} 
                             onClick={()=>dispatch({type: 'changePage', payload: n})}>
                                 {n}
                         </button>
-                    </li>))
+                    </span>))
             }
-            <li><button onClick={handleNext}>&#10095;</button></li>
-        </ul>
+            <button onClick={handleNext}>&#10095;</button>
+        </div>
     )
 }
 
