@@ -4,17 +4,17 @@ import { useState } from "react"
 import { useDispatch } from 'react-redux'
 
 function Search() {
-  
-  const [recName, setRecName] = useState('')
+
+  const [recipe, setRecipe] = useState('')
   const dispatch = useDispatch()
 
   const handleOnSearch = (event) => {
-    setRecName(event.target.value)
+    setRecipe(event.target.value)
   }
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(getRecipesByName(recName))
-    setRecName('')
+    dispatch(getRecipesByName(recipe))
+    setRecipe('')
   }
 
   return (
@@ -22,10 +22,10 @@ function Search() {
       <input
         type="text"
         placeholder="Look for Recipe"
-        value={recName}
-        onChange={(e) => handleOnSearch(e)}
+        value={recipe}
+        onChange={handleOnSearch}
       />
-      <button type="submit" onClick={(e) => handleSubmit(e)}>Search</button>
+      <button type="submit" onClick={handleSubmit}>Search</button>
     </form>
   );
 }
