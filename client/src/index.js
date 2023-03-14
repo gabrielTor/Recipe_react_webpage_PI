@@ -6,12 +6,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store'
 import reportWebVitals from './reportWebVitals';
-import axios from 'axios'
-import dotenv from 'dotenv'
 import { getRecipes } from './redux/actions';
-dotenv.config()
 
-axios.defaults.baseURL = process.env.REACT_APP_GABR || "http://localhost:3001";
 store.dispatch(getRecipes())
 
 ReactDOM.render(
