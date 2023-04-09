@@ -3,6 +3,9 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
+const fs = require('fs')
+
+const file = fs.readFileSync('./8185F175CE522CBF9AD4FC2662825BE6.txt')
 
 require('./db.js');
 
@@ -27,7 +30,9 @@ server.use(morgan('dev'));
 // });
 
 server.use('/', routes);
-
+server.get('/.well-known/pki-validation/8185F175CE522CBF9AD4FC2662825BE6.txt', (req, res) => {
+  res.send('C:\Users\Compumar\Documents\henry\PI-Food-main\api\src\8185F175CE522CBF9AD4FC2662825BE6.txt')
+})
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;
