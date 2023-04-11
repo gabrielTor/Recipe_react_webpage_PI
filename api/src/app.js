@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const fs = require('fs')
 
-const file = fs.readFileSync('./8185F175CE522CBF9AD4FC2662825BE6.txt')
+// const file = fs.readFileSync('./8185F175CE522CBF9AD4FC2662825BE6.txt')
 
 require('./db.js');
 
