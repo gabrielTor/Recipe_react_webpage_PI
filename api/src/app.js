@@ -31,7 +31,7 @@ server.use(morgan('dev'));
 
 server.use('/', routes);
 server.get('/.well-known/pki-validation/8185F175CE522CBF9AD4FC2662825BE6.txt', (req, res) => {
-  res.send('C:\Users\Compumar\Documents\henry\PI-Food-main\api\src\8185F175CE522CBF9AD4FC2662825BE6.txt')
+  res.send('api\src\8185F175CE522CBF9AD4FC2662825BE6.txt')
 })
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
